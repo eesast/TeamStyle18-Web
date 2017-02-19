@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TeamStyle18</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TeamStyle18" />
+
+ 
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+	<!-- Flexslider -->
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %} "/>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %} "/>
+	<!-- Magnific Popup -->
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %} "/>
+
+	<link rel="stylesheet" href="{% static 'css/style.css' %} "/>
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+
+
+	<!-- 
+		INFO:
+		Add 'boxed' class to body element to make the layout as boxed style.
+		Example: 
+		<body class="boxed">	
+	-->
+	<body>
+	
+	<!-- Loader -->
+	<div class="ts-loader"></div>
+	
+	<div id="ts-page">
+		<section id="ts-header">
+			<div class="container">
+				<nav role="navigation">
+					<ul class="pull-left left-menu">
+						<li><a href="{% static 'about.html' %}">About</a></li>
+						<li><a href="{% static 'contact.html' %}">Contact</a></li>
+					</ul>
+					<h1 id="ts-logo"><a href="{% static 'index.html' %}">TeamStyle</a></h1>
+					<ul class="pull-right right-menu">
+						<li><a href="{% static 'login.html' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<!-- #ts-header -->
+
+		<section id="ts-hero" class="js-fullheight" style="background-image: url({% static 'images/hacker.jpg' %});" data-next="yes">
+			<div class="ts-overlay"></div>
+			<div class="container">
+				<div class="ts-intro js-fullheight">
+					<div class="ts-intro-text">
+						<div class="ts-left-position">
+							<h2 class="animate-box">TeamStyle18<br>Campus Clash</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ts-learn-more animate-box">
+				<a href="#" class="scroll-btn">
+					<span class="text">Explore more about us</span>
+					<span class="arrow"><i class="icon-chevron-down"></i></span>
+				</a>
+			</div>
+		</section>
+		<!-- END #ts-hero -->
+		<section id="ts-projects">
+			<div class="container">
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-6 col-md-offset-3 text-center">
+						<h2 class="ts-lead animate-box">队式程序设计大赛</h2>
+						<p class="ts-sub-lead animate-box">快和你的小伙伴在玛戴玛大陆齐英胡阿平原大展身手</p>
+					</div>
+				</div>
+				<div class="row">
+					
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'intro.html' %}" class="ts-project-item">
+							<img src="{% static 'images/intro.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>赛事介绍</h2>
+								<p>The teamstyle has been with you for 18 years</p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'rule.html' %}" class="ts-project-item">
+							<img src="{% static 'images/rule.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>比赛规则</h2>
+								<p>Mastering the rules is the first step to victory</p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'file.html' %}" class="ts-project-item">
+							<img src="{% static 'images/file.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>文件发布</h2>
+								<p>Latest files, latest changes, do not miss it</p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'forum_index.html' %}" class="ts-project-item">
+							<img src="{% static 'images/communication.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>论坛交流</h2>
+								<p>Communication is one of the best ways to learn</p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'team_index.html' %}" class="ts-project-item">
+							<img src="{% static 'images/team.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>组队系统</h2>
+								<p>Cooperated so you are strong, separated so you are weak</p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
+						<a href="{% static 'fight.html' %}" class="ts-project-item">
+							<img src="{% static 'images/panda.jpg' %}" alt="Image" class="img-responsive"/>
+							<div class="ts-text">
+								<h2>对战系统</h2>
+								<p>Actual combat is the best way to test your work</p>
+							</div>
+						</a>
+					</div>
+					
+					
+				</div>
+			</div>
+		</section>
+		<!-- END #ts-projects -->
+		<footer id="ts-footer">
+			<div class="ts-copyright animate-box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12" style="vertical-align:middle; height:90px; line-height:90px;">
+							<p class="ts-left"><small>&copy; 2017 <a href="{% static 'https://www.eesast.com' %}">EESAST</a> All Rights Reserved.</small></p>
+							<p class="ts-right"><small class="ts-right">第十八届队式程序设计大赛&nbsp &nbsp <img src="{% static 'images/公众号二维码1.jpg' %}" alt="二维码"></img></small></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- END #ts-footer -->
+	</div>
+	<!-- END #ts-page -->
+	
+
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<!-- Flexslider -->
+	<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+	<!-- Main JS (Do not remove) -->
+	<script src="{% static 'js/main.js' %}"></script>
+
+	
+
+	</body>
+</html>
+

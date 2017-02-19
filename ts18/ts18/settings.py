@@ -37,8 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'index',
+    'login',
+    'contact',
+    'forum',
+    'team',
 ]
 
+REST_FRAMEWORK = {
+     # Use Django's standard `django.contrib.auth` permissions,
+     # or allow read-only access for unauthenticated users.
+     'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+     ],
+     'DEFAULT_RENDERER_CLASSES': (
+         'rest_framework.renderers.JSONRenderer',
+     ),
+     'DEFAULT_PARSER_CLASSES': (
+         'rest_framework.parsers.JSONParser',
+     )
+ }
+ 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,3 +137,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
