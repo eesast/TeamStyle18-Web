@@ -81,7 +81,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .table-content  {
 	font-family:PMingLiU;
-	border: 2px solid #575757!important;
+	border-style:double;
+	border-width:1px;
+	border-color:#575757!important;
 }
 
 
