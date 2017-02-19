@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TeamStyle18</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TeamStyle18" />
+
+ 
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Flexslider -->
+	<link rel="stylesheet" href="css/flexslider.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+   
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	
+	<!-- 
+		INFO:
+		Add 'boxed' class to body element to make the layout as boxed style.
+		Example: 
+		<body class="boxed">	
+	-->
+	<body>
+
+	<!-- Loader -->
+	<div class="ts-loader"></div>
+	
+	<div id="ts-page">
+		<section id="ts-header">
+			<div class="container">
+				<nav role="navigation">
+					<ul class="pull-left left-menu">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="intro.html">介绍</a></li>
+						<li><a href="rule.html">规则</a></li>
+						<li><a href="file.html">文件</a></li>
+						<li><a href="forum_index.html">论坛</a></li>
+						<li class="active"><a href="team_index.html">组队</a></li>
+						<li><a href="fight.html">对战</a></li>
+						<li><a href="https://www.eesast.com">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+					
+					<ul class="pull-right right-menu">
+						<li><a href="#">Login</a></li>
+						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<!-- #ts-header -->
+
+		<section id="ts-hero" class="no-js-fullheight" style="background-image: url(images/full_image_1.jpg);" data-next="yes">
+			<div class="ts-overlay"></div>
+			<div class="container">
+				<div class="ts-intro no-js-fullheight">
+					<div class="ts-intro-text">
+						
+						<div class="ts-center-position">
+							<h2 class="animate-box">Who We Are</h2>
+							<h3 class="animate-box">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there.</h3>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ts-learn-more animate-box">
+				<a href="#" class="scroll-btn">
+					<span class="text">Explore more about us</span>
+					<span class="arrow"><i class="icon-chevron-down"></i></span>
+				</a>
+			</div>
+		</section>
+		<!-- END #ts-hero -->
+		
+		
+		<section id="ts-about">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2>队伍信息</h2>
+						{% if in_team %}
+		
+										       {% if is_leader %}
+											   <table class="table table-striped table-bordered">
+											        <thead>
+													  <tr>
+													    <td>队伍</td>
+														<td>信息</td>
+														<td>操作</td>
+												      </tr>
+													</thead>
+											        <tbody>
+												    <tr>
+													  <td style="font-weight:bold;">队名</td>
+													  <td>{{team.name}}</td>
+													  <td>不可改</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">简介</td>
+													  <td>{{team.intro}}</td>
+													  <td>不可改</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">队长</td>
+													  <td>{{team.leader.username}}</td>
+													  <td>不可改</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">成员数</td>
+													  <td>{{team.members.count}}</td>
+													  <td>不可改</td>
+													</tr>
+													
+													{% for member in team.members.all %}
+													<tr>
+													  <td style="font-weight:bold;">成员</td>
+													  <td>{{member.username}}</td>
+													  <td>
+                                                          <form action="#" method="post">
+											                 <input type="hidden" name="name" value="{{member.username}}"> 
+											                 <button class="btn btn-sm btn-info" onclick="form.submit();" title="踢出队伍">踢出队伍</button>
+											            </form>
+													  </td>
+													</tr>
+													{% endfor %}
+													
+													</tbody>
+											   </table>
+											   
+                                               <form action="{% url 'teams:dismiss' %}" method="post" style="padding-bottom:25px; padding-top:20px;">{% csrf_token %}
+											     <input type="hidden" name="team_id" value="{{team.id}}"> 
+											     <button class="btn btn-md btn-info" onclick="form.submit();" title="解散队伍">解散队伍</button>
+											   </form>
+											   
+											   
+											   
+											   <h2 class="post-title">有人申请加入你的队伍</h2>
+											   <table class="table table-bordered table-striped">
+											        <thead>
+								
+													  <tr>
+													    <td>姓名</td>
+														<td>申请理由</td>
+														<td>操作</td>
+													  </tr>
+													</thead>
+													<tbody>
+                                                      {% if note %}
+                                                        <p> {{note}} </p>
+                                                      {% endif %}
+
+                                                      {% if errors %}
+                                                        {% for error in errors %}
+                                                          <p> {{error}} </p>
+                                                        {% endfor %}
+                                                      {% endif %}
+
+													  {% for applier in app_list %}
+													  <tr>
+													    <td>{{applier.applicant.username}}</td>
+														<td>{{applier.reason}}</td>
+														<td>
+														  <form action="{% url 'teams:acceptOrReject' %}" method="post" style="display:inline;">
+                                                            {% csrf_token %}
+														    <input type="hidden" name="app_id" value="{{applier.id}}"> 
+											                <input type="hidden" name="answer" value="agree"> 
+											                <button class="btn btn-sm btn-info" onclick="form.submit();" title="同意">同意</button>
+											              </form>
+                                                          <form action="{% url 'teams:acceptOrReject' %}" method="post" style="display:inline;" >
+                                                            {% csrf_token %}
+														    <input type="hidden" name="app_id" value="{{applier.id}}"> 
+											                <input type="hidden" name="answer" value="disagree"> 
+											                <button class="btn btn-sm btn-info" onclick="form.submit();" title="拒绝">拒绝</button>
+											              </form>
+														</td>
+													  </tr>
+													  {% endfor %}
+													 
+													</tbody>
+												</table>
+												
+												{% endif %}
+												{% if not is_leader %}
+												<table class="table table-striped table-bordered">
+											        <tbody>
+												    <tr>
+													  <td style="font-weight:bold;">队名</td>
+													  <td>{{team.name}}</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">简介</td>
+													  <td>{{team.intro}}</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">队长</td>
+													  <td>{{team.leader.username}}</td>
+													</tr>
+													<tr>
+													  <td style="font-weight:bold;">成员数</td>
+													  <td>{{team.members.count}}</td>
+													</tr>
+													{% for member in members %}
+													<tr>
+													  <td style="font-weight:bold;">成员</td>
+													  <td>{{member.username}}</td>
+													</tr>
+													{% endfor %}
+													</tbody>
+											   </table>
+											   
+											   {% endif %}
+											{% endif %}
+											{% if not in_team  %}
+											<h3>您还没有加入任何一支队伍</h3>
+											{% endif %}
+												
+									</div>
+								</div>
+							</div>
+			</section>
+						
+		
+		
+		
+		
+		
+		
+		
+		<footer id="ts-footer">
+			<div class="ts-copyright animate-box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<p class="ts-left"><small>&copy; 2017 <a href="https://www.eesast.com">EESAST</a> All Rights Reserved.</small></p>
+							<p class="ts-right"><small class="ts-right">第十八届队式程序设计大赛</small></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- END #ts-footer -->
+	</div>
+	<!-- END #ts-page -->
+	
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Main JS (Do not remove) -->
+	<script src="js/main.js"></script>
+
+	
+
+	</body>
+</html>
