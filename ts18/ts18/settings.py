@@ -25,7 +25,9 @@ SECRET_KEY = '6ogq))efpmgdks1!(=08zx(9w22*qzig&+^bz*+b(^fr2+-21+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.eesast.com',
+]
 
 
 # Application definition
@@ -42,8 +44,28 @@ INSTALLED_APPS = [
     'contact',
     'forum',
     'team',
+	'file',
 ]
 
+EESAST_AUTHORIZE_URL = 'www.eesast.com/'
+EESAST_CLIENTID = 'Bmi9gb1i5rsfuIsXwGPxuM1jTxRkNNkgEDaO9znR'
+EESAST_CLIENTSECRET = 'client_secret'
+EESAST_CALLBACK = 'http://localhost:8000/'
+
+REST_FRAMEWORK = {
+     # Use Django's standard `django.contrib.auth` permissions,
+     # or allow read-only access for unauthenticated users.
+     'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+     ],
+     'DEFAULT_RENDERER_CLASSES': (
+         'rest_framework.renderers.JSONRenderer',
+     ),
+     'DEFAULT_PARSER_CLASSES': (
+         'rest_framework.parsers.JSONParser',
+     )
+ }
+ 
 REST_FRAMEWORK = {
      # Use Django's standard `django.contrib.auth` permissions,
      # or allow read-only access for unauthenticated users.

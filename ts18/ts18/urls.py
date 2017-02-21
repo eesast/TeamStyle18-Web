@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^team/', include('team.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', include('login.urls')),
+    url(r'', include('file.urls')),
 ]
