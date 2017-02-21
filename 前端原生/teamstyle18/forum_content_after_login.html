@@ -87,7 +87,7 @@
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="login.html">Login</a></li>
+						<li><a href="login.html">Welcome</a></li>
 						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
 					</ul>
 				</nav>
@@ -124,7 +124,7 @@
 						<table class="table table-bordered table-content">
 							<thead>
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">楼主&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr>
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">楼主&nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'">点击回复</a><hr>
 									<div style="text-align:center;">
 									小明<br>
 									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
@@ -141,7 +141,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr><div style="text-align:center;">
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'">点击回复</a><hr><div style="text-align:center;">
 									小明<br>
 									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
 									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
@@ -151,13 +151,14 @@
 									
 								</tr>
 								<tr>
+									<!--这里是显示对每一楼的回复 -->
 									<td id="tdreply" colspan="3">
-										<p style="display:inline; font-family:SimSun;"><strong>Lebron</strong> 回复<strong> Klay</strong>:你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'" style="display:inline;">回复</a>
+										<p style="display:inline; font-family:SimSun;"><strong>Lebron</strong> 回复<strong> Klay</strong>:你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'" style="display:inline;">回复</a>
 										<hr style="height:1px; border:none; border-top:1px solid #292929;">
-										<p style="display:inline; font-family:SimSun;"><strong>Klay</strong> 回复<strong> Lebron</strong>:你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'" style="display:inline;">回复</a>
+										<p style="display:inline; font-family:SimSun;"><strong>Klay</strong> 回复<strong> Lebron</strong>:你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'" style="display:inline;">回复</a>
 								</tr>
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr>
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'">点击回复</a><hr>
 									<div style="text-align:center;">
 									小明<br>
 									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
@@ -239,7 +240,7 @@
 		</section>
 		
 		<div class="container" id="reply">
-			<p style="display:inline;">回复KyrieYoung</p>
+			<p style="display:inline;">回复KyrieYoung</p>   
 			<a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='none'" style="color:#707070; display:inline; padding-left:2%;">取消</a>
             <form id="contact-form" class="row" action="#" method="post">
             <textarea title="* Please enter your message" style="width:80%; margin-bottom:20px; margin-left:40px; margin-top:30px;" rows="10"></textarea> 	
