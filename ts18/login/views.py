@@ -88,7 +88,11 @@ def Login(request):
     return render(request, 'login.html', {'error':error})
 
 def Get_Image(request):
-    profile=request.user.profile
+    try:
+        profile=request.user.profile
+    except Exception:
+        profile = Member(user = request.user)
+        profile.save()
     old_name = profile.image.name
 
     if not 'image' in request.FILES:
@@ -128,7 +132,7 @@ def Get_Image(request):
     profile.save()
 
 def Logout(request):
-	logout(request)
-	return HttpResponseRedirect("/")
+    logout(request)
+    return HttpResponseRedirect("/")
 
 

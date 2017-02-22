@@ -1,10 +1,9 @@
 # -*-  coding:utf-8 -*-
 from django.shortcuts import render, render_to_response,HttpResponseRedirect
-from forum import forms
-from forum.models import Post,PostFile,Comment
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login
-from forum.forms import PostForm,CommentForm
+from .models import Post, PostFile, Comment
+from .forms import PostForm,CommentForm
 
 Category_List=(
 		('1','赛事公告'),
@@ -17,7 +16,6 @@ def forum_content(request,id):
 		post = Post.objects.get(id=int(id))
 	except:
 		HttpResponseRedirect('/forum_index')
-	delete_id = None
 	delete_id = request.POST.get('delete_id','')
 	try:
 		delcomment = Comment.objects.get(id=int(delete_id))
@@ -35,8 +33,8 @@ def forum_content(request,id):
 				comment.post.save()
 			else:
 				form = CommentForm()
-			print(4)
 		commentlist = post.p_comment.all()
+		print(1)
 		return render(request,'forum_content_after_login.html',{'post':post,'commentlist':commentlist})
 	else:
 		commentlist = post.p_comment.all()
@@ -45,12 +43,14 @@ def forum_content(request,id):
 
 
 def forum_create(request):
+	if not request.user.is_authenticated():
+		forum_index(request)
 	if request.method == 'POST':
 		form = PostForm(request.POST)
 		print(form.errors)
 		if form.is_valid():
 			cd = form.cleaned_data
-			post = Post(title=cd['title'],content=cd['body'],sender=request.user,summary=cd['outline'],category=cd['category'])
+			post = Post(title=cd['title'],content=cd['body'],sender=request.user,category=cd['category'])
 			post.save()
 			return HttpResponseRedirect('/forum_index')
 	else:
@@ -159,10 +159,9 @@ def forum_index_jishu(request,page=1):
 	else:
 		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 
-def forum_index_shuitie(request,page=1):
+def forum_index_bug(request,page=1):
 	post_list = Post.objects.filter(category='3')
 	paginator = Paginator(post_list,5)
-	delete_id = None
 	delete_id = request.POST.get('delete_id','')
 	try:
 		post = Post.objects.get(id=int(delete_id))
