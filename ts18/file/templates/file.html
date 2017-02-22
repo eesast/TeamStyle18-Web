@@ -51,20 +51,20 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="intro.html">介绍</a></li>
-						<li><a href="rule.html">规则</a></li>
-						<li class="active"><a href="file.html">文件</a></li>
-						<li><a href="forum_index.html">论坛</a></li>
-						<li><a href="team_index.html">组队</a></li>
-						<li><a href="fight.html">对战</a></li>
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% static 'intro.html' %}">介绍</a></li>
+						<li><a href="{% static 'rule.html' %}">规则</a></li>
+						<li class="active"><a href="{% static 'file.html' %}">文件</a></li>
+						<li><a href="{% static 'forum_index.html' %}">论坛</a></li>
+						<li><a href="{% static 'team_index.html' %}">组队</a></li>
+						<li><a href="{% static 'fight.html' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{% static 'contact.html' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="#">Login</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						<li><a href="{% static 'login.html' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
