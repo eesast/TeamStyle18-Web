@@ -32,31 +32,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	            <style>
-				#noreply {
-				display:none;
-				position:fixed;
-				bottom:50%;
-				left:30%;
-				border: 0.2px solid;
-				background-color:#fff;
-				width:40%;
-				z-index:1000;
-				padding:15px;
-				}
-				#reply {
-				display:none;
-				position:fixed;
-				bottom:0%;
-				width:100%;
-				border-top: 0.2px solid;
-				background-color:#fff;
-				z-index:1000;
-				padding:15px;
-				
-				
-				}
-                </style>
+	          
 
 	</head>
 
@@ -76,20 +52,20 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="intro.html">介绍</a></li>
-						<li><a href="rule.html">规则</a></li>
-						<li><a href="file.html">文件</a></li>
-						<li class="active"><a href="forum_index.html">论坛</a></li>
-						<li><a href="team_index.html">组队</a></li>
-						<li><a href="fight.html">对战</a></li>
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% static 'intro.html' %}">介绍</a></li>
+						<li><a href="{% static 'rule.html' %}">规则</a></li>
+						<li><a href="{% static 'file.html' %}">文件</a></li>
+						<li class="active"><a href="{% static 'forum_index.html' %}">论坛</a></li>
+						<li><a href="{% static 'team_index.html' %}">组队</a></li>
+						<li><a href="{% static 'fight.html' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{% static 'contact.html' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="login.html">Welcome</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						<li><a href="{% static 'login.html' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -125,7 +101,7 @@
 						<table class="table table-bordered table-content">
 							<thead>
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">楼主&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr>
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap; width:12%;">楼主<hr>
 									<div style="text-align:center;">
 									{{post.sender}}<br>
 									<img src="{{post.sender.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
@@ -144,7 +120,7 @@
 								{% if commentlist %}
 								{% for comment in commentlist %}
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr><div style="text-align:center;">
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼<hr><div style="text-align:center;">
 									{{comment.replier}}<br>
 									<img src="{{comment.replier.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
 									<p style="margin-top:14px; font-size:15px; font-family: Arial;">{{comment.replytime}}</p>
@@ -158,22 +134,25 @@
 								
 							</tbody>
 						</table>
-						                                                                       
-																							   <!-- 如果没有登陆   -->
-						                                                                        <div id='noreply'>
-																								<div>
-																								<p style="font-size:20px;">您还没有登录，不能发帖和回复</p>
-																								<p style="font-size:20px;"><a href="{% url 'login:login' %}">点此登录</a></p>
-																								<p style="font-size:20px;"><a onclick = "document.getElementById('noreply').style.display='none'">退出</a></p>
-																								</div>
-													                                            </div>
+						                                                                      
 																								
 																								
 						
 					</div>
-					<div class="col-md-2 col-md-offset-10">
-						<button class="btn btn-lg btn-info"><a href="forum_index.html" style="color:white;">返回论坛首页</a></button>
-					</div>
+					<div class="col-md-12" style="margin-top:40px;">
+						<form id="reply-form" class="row" action="#" method="post">
+						<h3>回复楼主</h3>
+                                                        
+                                                       <textarea title="* Please enter your message" style="width:100%; margin-bottom:20px" rows="10"></textarea>
+                                                       
+                                                        <br>
+                                                        
+                                                                <input type="submit" name="submit" value="Send Message" class="btn btn-primary btn-ctn btn-lg">
+																<button class="btn btn-lg btn-info"><a href="{% static 'forum_index.html' %}" style="color:white;">返回论坛首页</a></button>
+                                                </form>
+						                                                                      
+																								
+					    </div>				
 					
 				                                                                         
 			    </div>
@@ -181,15 +160,7 @@
 			                                                                                    
 		</section>
 		
-		<div class="container" id="reply">
-			<p style="display:inline;">回复KyrieYoung</p>   
-			<a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='none'" style="color:#707070; display:inline; padding-left:2%;">取消</a>
-            <form id="contact-form" class="row" action="#" method="post">
-            <textarea title="* Please enter your message" style="width:80%; margin-bottom:20px; margin-left:40px; margin-top:30px;" rows="10"></textarea> 	
-			<br>
-            <input type="submit" name="submit" value="Send" class="btn btn-primary btn-ctn btn-lg" style="width:80%; margin-bottom:20px; margin-left:40px;">			
 		
-		</div>
 		
 		
 		
