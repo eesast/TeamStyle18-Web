@@ -15,7 +15,6 @@ class Post(models.Model):
 	timestamp = models.DateTimeField(auto_now=True)
 	content = models.TextField(u'内容',blank=True, null=True)
 	sender = models.ForeignKey(User,on_delete=models.CASCADE)
-	summary = models.CharField(u'摘要',blank=True, null=True,max_length=100)
 	category = models.CharField(max_length = 1,default=1,choices=Category_List)
 	priority = models.IntegerField(default=1000,verbose_name="优先级")
 	def __unicode__(self):

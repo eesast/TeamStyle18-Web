@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'', include('index.urls')),
     url(r'', include('contact.urls')),
     url(r'', include('forum.urls')),
-    url(r'^team/', include('team.urls')),
+    url(r'^teams/', include('teams.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', include('login.urls')),
     url(r'', include('file.urls')),

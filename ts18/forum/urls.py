@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-
 app_name = 'forum'
 
 urlpatterns = [
@@ -11,8 +10,8 @@ urlpatterns = [
     url(r'^forum_index_tongzhi?page=([0-9]+)$',views.forum_index_tongzhi,name='forum_index_tongzhi'),
     url(r'^forum_index_jishu$',views.forum_index_jishu,name='forum_index_jishu'),
     url(r'^forum_index_jishu?page=([0-9]+)$',views.forum_index_jishu,name='forum_index_jishu'),
-    url(r'^forum_index_shuitie$',views.forum_index_shuitie,name='forum_index_shuitie'),
-    url(r'^forum_index_shuitie?page=([0-9]+)$',views.forum_index_shuitie,name='forum_index_shuitie'),
+    url(r'^forum_index_bug$',views.forum_index_bug,name='forum_index_bug'),
+    url(r'^forum_index_bug?page=([0-9]+)$',views.forum_index_bug,name='forum_index_bug'),
     url(r'^forum_index_mypost$',views.forum_index_mypost,name='forum_index_mypost'),
     url(r'^forum_index_mypost?page=([0-9]+)$',views.forum_index_mypost,name='forum_index_mypost'),
     url(r'^forum_content/(?P<id>[0-9]+)',views.forum_content),

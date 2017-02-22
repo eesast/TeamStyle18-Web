@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -12,21 +13,21 @@
 
  
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
 	<!-- Flexslider -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
    
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -95,7 +96,7 @@
 		</section>
 		<!-- #ts-header -->
 
-		<section id="ts-hero" class="no-js-fullheight" style="background-image: url(images/forum_full.jpg);" data-next="yes">
+		<section id="ts-hero" class="no-js-fullheight" style="background-image: url({% static 'images/forum_full.jpg' %});" data-next="yes">
 			<div class="ts-overlay"></div>
 			<div class="container">
 				<div class="ts-intro no-js-fullheight">
@@ -126,92 +127,34 @@
 								<tr>
 									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">楼主&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr>
 									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
+									{{post.sender}}<br>
+									<img src="{{post.sender.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
+									<p style="margin-top:14px; font-size:15px; font-family: Arial;">{{post.timestamp}}</p>
 									</div>
 									</td>
 									<td>
-										<h3 style="margin-top:20px;">求问这个东西到底怎么写RT（帖子题目）</h3>
+										<h3 style="margin-top:20px;">{{post.title}}</h3>
 										<hr>
-										<p>如题，小白求教（帖子详细描述）</p>
+										<p>{{post.content}}</p>
 									</td>
 								
 								</tr>
 							</thead>
 							<tbody>
+								{% if commentlist %}
+								{% for comment in commentlist %}
 								<tr>
 									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'">点击回复</a><hr><div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
+									{{comment.replier}}<br>
+									<img src="{{comment.replier.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
+									<p style="margin-top:14px; font-size:15px; font-family: Arial;">{{comment.replytime}}</p>
 									</div>
 									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊</td>
+									<td>{{comment.content}}</td>
 									
 								</tr>
-								<tr>
-									<td id="tdreply" colspan="3">
-										<p style="display:inline; font-family:SimSun;"><strong>Lebron</strong> 回复<strong> Klay</strong>:你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'" style="display:inline;">回复</a>
-										<hr style="height:1px; border:none; border-top:1px solid #292929;">
-										<p style="display:inline; font-family:SimSun;"><strong>Klay</strong> 回复<strong> Lebron</strong>:你说的这是个啥啊，能不能说点干货</p>&nbsp &nbsp <a href="javascript:void(0);" onclick="document.getElementById('noreply').style.display='block'" style="display:inline;">回复</a>
-								</tr>
-								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼&nbsp <a href="javascript:void(0);" onclick="document.getElementById('reply').style.display='block'">点击回复</a><hr>
-									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
-									</div>
-									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊</td>
-									
-								</tr>
-								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼<hr>
-									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
-									</div>
-									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊</td>
-									
-								</tr>
-								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼<hr>
-									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
-									</div>
-									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做</td>
-									
-								</tr>
-								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼<hr>
-									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
-									</div>
-									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊</td>
-									
-								</tr>
-								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼<hr>
-									<div style="text-align:center;">
-									小明<br>
-									<img src="images/hero_bg.jpg" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">2017-02-19 18:06</p>
-									</div>
-									</td>
-									<td>楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊楼主你这个问题啊，真是naive。我两万年前就会做这个了，一会告诉你怎么做啊</td>
-									
-								</tr>
-								
+								{% endfor %}
+								{% endif %}
 								
 							</tbody>
 						</table>
@@ -268,17 +211,17 @@
 	
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js'%}"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
 	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
+	<script src="{% static 'js/main.js' %}"></script>
 
 	
 

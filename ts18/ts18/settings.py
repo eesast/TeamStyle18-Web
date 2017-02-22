@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'login',
     'contact',
     'forum',
-    'team',
+    'teams',
 	'file',
 ]
 
@@ -154,6 +154,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
