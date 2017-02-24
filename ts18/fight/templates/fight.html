@@ -38,6 +38,20 @@
 				z-index:1000;
 				padding:15px;
 				}
+				
+				
+				#notlogin {
+				display:none;
+				position:fixed;
+				bottom:50%;
+				left:30%;
+				border: 0.2px solid;
+				background-color:#fff;
+				width:40%;
+				z-index:1000;
+				padding:15px;
+				}
+               
                 </style>
    
    
@@ -51,14 +65,13 @@
 	<script type="text/javascript">
 		function getandpost(url,num)
 		{
-			var teamname=document.getElementById('fighttable').rows[num-1].cells[1];
 			var tempform=document.createElement('form');
 			tempform.action=url;
 			tempform.method="post";
 			tempform.display.style="none";
 			var opt=document.createElement('input');
-			opt.name="name";
-			opt.value=teamname;
+			opt.name="id";
+			opt.value=num;
 			tempform.appendChild(opt);
 			var optsu=document.createElemnt('input');
 			optsu.type="submit";
@@ -103,7 +116,12 @@
 					</ul>
 					
 					<ul class="pull-right right-menu">
+						{% if request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Welcome</a></li>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
 						<li><a href="{% url 'login:login' %}">Login</a></li>
+						{% endif %}
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
@@ -138,7 +156,14 @@
 			<div class=container">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<h2 style="display:inline">对战信息</h2> &nbsp &nbsp &nbsp &nbsp &nbsp <h3 style="display:inline"><a href="{% url 'fight:rank' %}" style="color:#484c50">查看天梯榜</a> &nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
+						<h2 style="display:inline">对战信息</h2> &nbsp &nbsp &nbsp &nbsp &nbsp <h3 style="display:inline"><a href="{% url 'fight:rank' %}" style="color:#484c50">查看天梯榜</a>
+						{% if request.user.is_authenticated %}
+						&nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
+						&nbsp &nbsp <a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">提交/修改我的代码</a></h3>
+						{% endif %}
+						
 						<hr>
 						<p>提交代码后即可发起对战和被挑战</p>
 						
@@ -153,99 +178,37 @@
 													</tr>
 												  </thead>
 												  <tbody>
+													
 												    <tr>
 													  <td>10</td>
 													  <td>这里写队名</td>
 													  <td>这里写简介</td>
 													  <td>2017-06-10 18:40</td>
+													  {% if request.user.is_authenticated %}
 													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  {% endif %}
+													  {% if not request.user.is_authenticated %}
+													  <td><a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">发起挑战</a>
+													  {% endif %}
 													</tr>
-													 <tr>
-													  <td>2</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-10 18:50</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-10 18:48</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-10 18:30</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-09 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-17 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>4</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-18 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>7</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2016-06-10 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>9</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-11-10 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>4</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-09-12 16:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>2</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-04-30 09:07</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>3</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-01-01 18:40</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
+													
 												  </tbody>
 												</table>
 												
 												
 						</div>
 						
-						
+																								<div id='notlogin'>
+																								<div class="container">
+																								<p style="font-size:20px;">您还没有登录，不能提交代码或发起挑战</p>
+																								<p style="font-size:20px;"><a href="{% url 'login:login' %}">点此登录</a></p>
+																								<p style="font-size:20px;"><a onclick = "document.getElementById('notlogin').style.display='none'">退出</a></p>
+																								</div>
+													
+																								
+																								</div>
 										<div id="wait">
-											<p>正在对战中，这可能会花一些时间，对战结束后将会提醒您</p>
+											<p>正在对战中，这可能会花一些时间，对战结束后将会自动刷新页面，请勿手动刷新</p>
 										</div>
 					</div>
 				</div>
