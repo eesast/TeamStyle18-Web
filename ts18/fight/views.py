@@ -3,6 +3,8 @@ from .models import Player, Record
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from wsgiref.util import FileWrapper
+from itertools import chain
+from operator import attrgetter
 import os
 import urllib
 
@@ -40,6 +42,12 @@ def index(request):
             return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
         else:
             return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
+
+
+
+
+
+
 
 def Get_AI(request):
     try:
@@ -84,7 +92,7 @@ def Get_AI(request):
     data.save()
 
 def myself(request):
-    print(request.FILES)
+    print(request.user.username)
     try:
         data=Player.objects.get(player=request.user)
     except :
@@ -93,32 +101,33 @@ def myself(request):
     error=''
     record_list=[]
     records=[]
+    record_list=request.user.playerdata.ai1_record.all()
+    print(record_list)
+    record_list2=request.user.playerdata.ai2_record.all()
+    record_list = sorted(chain(record_list,record_list2), key=attrgetter('time'),reverse=False)
+    print(record_list)
+
     try:
-        record_list=request.user.ai1_record.all()
-    except:
-        pass
-    try:
-        record_list+=request.user.ai2_record.all()
+        record_list=request.user.ai2_record.all()
     except:
         pass
     if not record_list==[]:
-        record_list=record_list.order_by('time')
         for record in record_list:
             r={}
-            r['time']=record['time']
-            r['log']=record['log']
-            if record['AI1']==request.user:
-                r['scorechange']=record['AI1_scorechange']
-                r['competitor']=record['AI2']
-                if record['result']=='0':
+            r['time']=record.time
+            r['log']=record.log
+            if record.AI1==request.user:
+                r['scorechange']=record.AI1_scorechange
+                r['competitor']=record.AI2
+                if record.result=='0':
                     r['result']='胜利'
                 if record['result']=='1':
                     r['result']='失败'
                 else:
                     r['result']='平局'
-            if record['AI2']==request.user:
-                r['scorechange']=record['AI2_scorechange']
-                r['competitor']=record['AI1']
+            if record.AI2==request.user:
+                r['scorechange']=record.AI2_scorechange
+                r['competitor']=record.AI1
                 if record['result']=='1':
                     r['result']='胜利'
                 if record['result']=='0':
@@ -129,11 +138,10 @@ def myself(request):
 
     if request.method=='POST':
         if request.user.is_authenticated():
-            print(error)
             error = Get_AI(request)
-            print(error)
-            return render(request, 'fight_myself.html', {'error':error,'records':records})
-    return render(request, 'fight_myself.html', {'error':error,'records':records})
+            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
+
+    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
 
 
 
