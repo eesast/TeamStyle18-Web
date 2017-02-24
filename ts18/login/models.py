@@ -12,6 +12,7 @@ class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile' )
     student_id = models.CharField(max_length=20, blank=True)
     is_leader = models.BooleanField(default=False)
+    scores = models.IntegerField(default=1000,blank=True, null=True)
     image = models.ImageField(upload_to='head_images',
                               default=os.path.join('head_images', 'customer.png'))
     def __str__(self):

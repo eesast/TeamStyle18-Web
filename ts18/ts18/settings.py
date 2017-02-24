@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'forum',
     'teams',
 	'file',
+    'fight',
 ]
 
 EESAST_AUTHORIZE_URL = 'www.eesast.com/'

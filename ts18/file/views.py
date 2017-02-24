@@ -13,7 +13,6 @@ def noticeIndex(request):
     return render(request, 'file.html', {'notice_list' : notice_list})
 
 def download(request):
-
     try:
         filename = request.GET['file']
     except:
