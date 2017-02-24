@@ -57,7 +57,7 @@
 						<li><a href="{% static 'rule.html' %}">规则</a></li>
 						<li><a href="{% static 'file.html' %}">文件</a></li>
 						<li class="active"><a href="{% static 'forum_index.html' %}">论坛</a></li>
-						<li><a href="{% static 'team_index.html' %}">组队</a></li>
+						<li><a href="{% static 'teams:index' %}">组队</a></li>
 						<li><a href="{% static 'fight.html' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
 						<li><a href="{% static 'contact.html' %}">Contact</a></li>
@@ -105,7 +105,7 @@
 									<div style="text-align:center;">
 									{{post.sender}}<br>
 									<img src="{{post.sender.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
-									<p style="margin-top:14px; font-size:15px; font-family: Arial;">{{post.timestamp}}</p>
+									<p class="date" style="margin-top:14px; font-size:15px; font-family: Arial;">{{post.timestamp}}</p>
 									</div>
 									</td>
 									<td>

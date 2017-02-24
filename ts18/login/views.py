@@ -44,8 +44,6 @@ def get_user_info(access_token):
 		return none
 
 def check_user(data):
-    print(data['name'])
-    print(data['student_ID'])
     if not 'name' in data or not 'student_ID' in data:
         raise Exception
     try:
@@ -61,15 +59,17 @@ def check_user(data):
         return user2
 
 def Login(request):
+    print(request.FILES)
     error = ''
     access_token=''
     if_logout=''
     if request.method =='POST':
-        if request.user.is_authenticated:
+        if request.user.is_authenticated():
             if 'logout' in request.POST:
                 Logout(request)
             else:
                 error = Get_Image(request)
+                print(error)
                 return render(request, 'login.html', {'error':error})
 
         else:
@@ -94,7 +94,7 @@ def Get_Image(request):
         profile = Member(user = request.user)
         profile.save()
     old_name = profile.image.name
-
+    print(1)
     if not 'image' in request.FILES:
         return '请上传一个文件'
 
