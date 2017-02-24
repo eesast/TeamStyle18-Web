@@ -138,8 +138,12 @@
 						
 		<!--				<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="forum_create.html" style="color: #FFFFFF">创建新的帖子</a></button>
 			-->			
-						<!-- 如果没有登陆   -->
+						{% if not request.user.is_authenticated %}
 						<div onclick = "document.getElementById('noreply').style.display='block'"><button class="btn btn-block btn-info"  style="font-size:20px; height:50px; margin-bottom:17px;">创建新的帖子</button></div>
+						{% endif %}
+						{% if request.user.is_authenticated %}
+						<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="{% url 'forum:forum_create' %}" style="color: #FFFFFF">创建新的帖子</a></button>
+						{% endif %}
 						
 					</div>
 					                                                                            <div id='noreply'>
