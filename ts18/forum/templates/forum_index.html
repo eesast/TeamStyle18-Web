@@ -111,10 +111,11 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<table class="table table-bordered table-forum">
+						<a href="{% url 'forum:forum_index' %}"  style="color:#484c50; font-size:20px;">全部帖子</a>&nbsp <a href="{% url 'forum:forum_index_tongzhi' %}" style="color:#484c50; font-size:20px;">赛事公告</a>&nbsp <a href="{% url 'forum:forum_index_jishu' %}" style="color:#484c50; font-size:20px;">技术讨论</a> &nbsp <a href="{% url 'forum:forum_index_bug' %}" style="color:#484c50; font-size:20px;">bug汇报</a>
+						<table class="table table-bordered table-forum" style="margin-top:20px;">
 							<thead style="font-weight:bold; background-color:#dcddc0;">
 								<tr>
-									<td>标题 &nbsp &nbsp <a href="{% url 'forum:forum_index' %}">全部帖子</a>&nbsp <a href="{% url 'forum:forum_index_tongzhi' %}">赛事公告</a>&nbsp <a href="{% url 'forum:forum_index_jishu' %}">技术讨论</a> &nbsp <a href="{% url 'forum:forum_index_bug' %}">bug汇报</a></td>
+									<td>标题</td>
 									<td>发帖人</td>
 									<td>发帖时间</td>
 									<td>回复数</td>
