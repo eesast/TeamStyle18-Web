@@ -38,6 +38,18 @@
 				z-index:1000;
 				padding:15px;
 				}
+				
+				#notlogin {
+				display:none;
+				position:fixed;
+				bottom:50%;
+				left:30%;
+				border: 0.2px solid;
+				background-color:#fff;
+				width:40%;
+				z-index:1000;
+				padding:15px;
+				}
                 </style>
    
 	<!-- Modernizr JS -->
@@ -45,14 +57,13 @@
 	<script type="text/javascript">
 		function getandpost(url,num)
 		{
-			var teamname=document.getElementById('fighttable').rows[num-1].cells[1];
 			var tempform=document.createElement('form');
 			tempform.action=url;
 			tempform.method="post";
 			tempform.display.style="none";
 			var opt=document.createElement('input');
-			opt.name="name";
-			opt.value=teamname;
+			opt.name="id";
+			opt.value=num;
 			tempform.appendChild(opt);
 			var optsu=document.createElemnt('input');
 			optsu.type="submit";
@@ -91,20 +102,25 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="intro.html">介绍</a></li>
-						<li><a href="rule.html">规则</a></li>
-						<li><a href="file.html">文件</a></li>
-						<li><a href="forum_index.html">论坛</a></li>
-						<li><a href="team_index.html">组队</a></li>
-						<li class="active"><a href="fight.html">对战</a></li>
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li class="active"><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="login.html">Login</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						{% if request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Welcome</a></li>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Login</a></li>
+						{% endif %}
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -156,92 +172,39 @@
 													  <td>这里写队名</td>
 													  <td>这里写简介</td>
 													  <td>30</td>
+													  {% if request.user.is_authenticated %}
 													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  {% endif %}
+													  {% if not request.user.is_authenticated %}
+													  <td><a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">发起挑战</a>
+													  {% endif %}
 													</tr>
-													 <tr style="background-color:#EECFA1">
-													  <td>2</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>20</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr style="background-color:#EED8AE">
-													  <td>3</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>16</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>4</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>15</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>5</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>12</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>6</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>10</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>7</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>9</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>8</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>7</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>9</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>0</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>10</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>0</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													<tr>
-													  <td>11</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>0</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
-													 <tr>
-													  <td>12</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>0</td>
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
-													</tr>
+													 
 												  </tbody>
 												</table>
 										<div class="col-md-4 col-md-offset-8">		
-										<h3 style="display:inline"><a href="fight.html" style="color:#484c50">返回对战首页</a> &nbsp &nbsp <a href="fight_myself.html" style="color:#484c50">提交/修改我的代码</a></h3>
+										<h3 style="display:inline"><a href="{% url 'fight:index' %}" style="color:#484c50">返回对战首页</a>
+										{% if request.user.is_authenticated %}
+										&nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
+										{% endif %}
+										{% if not request.user.is_authenticated %}
+										&nbsp &nbsp <a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">提交/修改我的代码</a></h3>
+										{% endif %}
 										</div>		
 												
 						</div>
+																								<div id='notlogin'>
+																								<div class="container">
+																								<p style="font-size:20px;">您还没有登录，不能提交代码或发起挑战</p>
+																								<p style="font-size:20px;"><a href="{% url 'login:login' %}">点此登录</a></p>
+																								<p style="font-size:20px;"><a onclick = "document.getElementById('notlogin').style.display='none'">退出</a></p>
+																								</div>
+													
+																								
+																								</div>
+										<div id="wait">
+											<p>正在对战中，这可能会花一些时间，对战结束后将会自动刷新页面，请勿手动刷新</p>
+										</div>
 					</div>
 				</div>
 			</section>
