@@ -51,18 +51,18 @@
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
 						<li><a href="{% url 'index:index' %}">Home</a></li>
-						<li class="active"><a href="{% static 'intro.html' %}">介绍</a></li>
-						<li><a href="{% static 'rule.html' %}">规则</a></li>
-						<li><a href="{% static 'file.html' %}">文件</a></li>
-						<li><a href="{% static 'forum_index.html' %}">论坛</a></li>
-						<li><a href="{% static 'team_index.html' %}">组队</a></li>
-						<li><a href="{% static 'fight.html' %}">对战</a></li>
+						<li class="active"><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="{% static 'contact.html' %}">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="{% static 'login.html' %}">Login</a></li>
+						<li><a href="{% url 'login:login' %}">Login</a></li>
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
@@ -70,15 +70,15 @@
 		</section>
 		<!-- #ts-header -->
 
-		<section id="ts-hero" class="no-js-fullheight" style="background-image: url(images/full_image_1.jpg);" data-next="yes">
+		<section id="ts-hero" class="no-js-fullheight" style="background-image: url({% static 'images/intro_full.jpg' %});" data-next="yes">
 			<div class="ts-overlay"></div>
 			<div class="container">
 				<div class="ts-intro no-js-fullheight">
 					<div class="ts-intro-text">
 						
 						<div class="ts-center-position">
-							<h2 class="animate-box">Who We Are</h2>
-							<h3 class="animate-box">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there.</h3>
+							<h2 class="animate-box">队式程序设计大赛</h2>
+							<h3 class="animate-box">The teamstyle has been with you for 18 years </h3>
 							
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 			<div class="container">
 				<div class="col-md-6 col-md-push-6">
 					<figure class="ts-feature-image animate-box">
-						<img src="images/macbook.png" alt="Free HTML5 Bootstrap Template by FREEHTML5.co">
+						<img src="{% static 'images/macbook.png' %}">
 					</figure>
 				</div>
 				<div class="col-md-6 col-md-pull-6">
@@ -115,7 +115,7 @@
 			<div class="container">
 				<div class="col-md-6 col-md-pull-8">
 					<figure class="ts-feature-image animate-box">
-						<img src="images/macbook.png">
+						<img src="{% static 'images/macbook.png' %}">
 					</figure>
 				</div>
 				<div class="col-md-6">

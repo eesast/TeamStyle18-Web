@@ -53,18 +53,18 @@
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
 						<li><a href="{% url 'index:index' %}">Home</a></li>
-						<li><a href="{% static 'intro.html' %}">介绍</a></li>
-						<li><a href="{% static 'rule.html' %}">规则</a></li>
-						<li><a href="{% static 'file.html' %}">文件</a></li>
-						<li class="active"><a href="{% static 'forum_index.html' %}">论坛</a></li>
-						<li><a href="{% static 'teams:index' %}">组队</a></li>
-						<li><a href="{% static 'fight.html' %}">对战</a></li>
+						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li class="active"><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="{% static 'contact.html' %}">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="{% static 'login.html' %}">Login</a></li>
+						<li><a href="{% url 'login:login' %}">Welcome</a></li>
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
@@ -148,7 +148,7 @@
                                                         <br>
                                                         
                                                                 <input type="submit" name="submit" value="Send Message" class="btn btn-primary btn-ctn btn-lg">
-																<button class="btn btn-lg btn-info"><a href="{% static 'forum_index.html' %}" style="color:white;">返回论坛首页</a></button>
+																<button class="btn btn-lg btn-info"><a href="{% url 'forum:forum_index' %}" style="color:white;">返回论坛首页</a></button>
                                                 </form>
 						                                                                      
 																								
