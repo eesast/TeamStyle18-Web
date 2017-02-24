@@ -59,7 +59,6 @@ def check_user(data):
         return user2
 
 def Login(request):
-    print(request.FILES)
     error = ''
     access_token=''
     if_logout=''

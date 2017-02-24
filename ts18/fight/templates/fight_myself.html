@@ -100,12 +100,17 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
+					{% load myfilter %}
+					    <a href="{{ player.ai.name|filelink }}">{{ player.ai.name|filename }}</a>
 						<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<h3>选择要提交的代码文件</h3>
+						
 						<input id="uploadFile" type="file" name="aiupload">
 						<input type="submit" name="submit" value="提交文件" class="btn btn-primary btn-md" style="margin-top:20px;">
+						{% if error %}
 						{{error}}
+						{% endif %}
 						</form>
 					</div>
 					<div class="col-md-12" style="margin-top:40px;">
@@ -121,13 +126,15 @@
 								</tr>
 							</thead>
 							<tbody>
+								{% for record in records %}
 								<tr>
-									<td>2017-02-24</td>
-									<td>aaaa</td>
-									<td>胜利</td>
-									<td>3</td>
+									<td>{{record.time}}</td>
+									<td>{{record.competitor}}</td>
+									<td>{{record.result}}</td>
+									<td>{{record.scorechange}}</td>
 									<td></td>
 								</tr>
+								{% endfor %}
 							</tbody>
 						</table>
 					</div>
