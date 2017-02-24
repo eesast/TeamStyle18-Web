@@ -73,10 +73,10 @@
 						<li><a href="{% url 'index:rule' %}">规则</a></li>
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li class="active"><a href="{% url 'forum:forum_index' %}">论坛</a></li>
-						<li><a href="{% static 'teams:index' %}">组队</a></li>
-						<li><a href="{% url 'fight:fight' %}">对战</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="{% url 'index:contact' %}">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
@@ -157,7 +157,7 @@
 						
 					</div>
 					<div class="col-md-2 col-md-offset-10">
-						<button class="btn btn-lg btn-info"><a href="{% static 'forum_index.html' %}" style="color:white;">返回论坛首页</a></button>
+						<button class="btn btn-lg btn-info"><a href="{% url 'forum:forum_index' %}" style="color:white;">返回论坛首页</a></button>
 					</div>
 					
 				                                                                         

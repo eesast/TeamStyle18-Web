@@ -91,20 +91,20 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="intro.html">介绍</a></li>
-						<li><a href="rule.html">规则</a></li>
-						<li><a href="file.html">文件</a></li>
-						<li><a href="forum_index.html">论坛</a></li>
-						<li><a href="team_index.html">组队</a></li>
-						<li class="active"><a href="fight.html">对战</a></li>
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li class="active"><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="login.html">Login</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						<li><a href="{% url 'login:login' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -238,7 +238,7 @@
 												  </tbody>
 												</table>
 										<div class="col-md-4 col-md-offset-8">		
-										<h3 style="display:inline"><a href="fight.html" style="color:#484c50">返回对战首页</a> &nbsp &nbsp <a href="fight_myself.html" style="color:#484c50">提交/修改我的代码</a></h3>
+										<h3 style="display:inline"><a href="{% url 'fight:index' %}" style="color:#484c50">返回对战首页</a> &nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
 										</div>		
 												
 						</div>

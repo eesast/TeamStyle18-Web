@@ -69,10 +69,10 @@
 						<li><a href="{% url 'index:rule' %}">规则</a></li>
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li class="active"><a href="{% url 'forum:forum_index' %}">论坛</a></li>
-						<li><a href="{% static 'teams:index' %}">组队</a></li>
-						<li><a href="{% url 'fight:fight' %}">对战</a></li>
+						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="{% url 'index:contact' %}">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
@@ -114,7 +114,7 @@
 						<table class="table table-bordered table-forum">
 							<thead style="font-weight:bold; background-color:#dcddc0;">
 								<tr>
-									<td>标题 &nbsp &nbsp <a href="#">全部帖子</a>&nbsp <a href="#">赛事公告</a>&nbsp <a href="#">技术讨论</a> &nbsp <a href="#">各路水帖</a></td>
+									<td>标题 &nbsp &nbsp <a href="{% url 'forum:forum_index' %}">全部帖子</a>&nbsp <a href="{% url 'forum:forum_index_tongzhi' %}">赛事公告</a>&nbsp <a href="{% url 'forum:forum_index_jishu' %}">技术讨论</a> &nbsp <a href="{% url 'forum:forum_index_bug' %}">bug汇报</a></td>
 									<td>发帖人</td>
 									<td>发帖时间</td>
 									<td>回复数</td>

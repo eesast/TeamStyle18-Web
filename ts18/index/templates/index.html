@@ -53,13 +53,13 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="{% static 'about.html' %}">About</a></li>
-						<li><a href="{% static 'contact.html' %}">Contact</a></li>
+						<li><a href="https://www.eesast.com">About</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					<h1 id="ts-logo"><a href="{% url 'index:index' %}">TeamStyle</a></h1>
 					<ul class="pull-right right-menu">
 						<li><a href="{% url 'login:login' %}">Login</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -96,7 +96,7 @@
 				<div class="row">
 					
 					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
-						<a href="{% static 'intro.html' %}" class="ts-project-item">
+						<a href="{% url 'index:intro' %}" class="ts-project-item">
 							<img src="{% static 'images/intro.jpg' %}" alt="Image" class="img-responsive"/>
 							<div class="ts-text">
 								<h2>赛事介绍</h2>
@@ -106,7 +106,7 @@
 					</div>
 
 					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
-						<a href="{% static 'rule.html' %}" class="ts-project-item">
+						<a href="{% url 'index:rule' %}" class="ts-project-item">
 							<img src="{% static 'images/rule.jpg' %}" alt="Image" class="img-responsive"/>
 							<div class="ts-text">
 								<h2>比赛规则</h2>
@@ -136,7 +136,7 @@
 					</div>
 
 					<div class="col-md-4 col-sm-6 col-xxs-12 animate-box">
-						<a href="{% static 'team_index.html' %}" class="ts-project-item">
+						<a href="{% url 'team:index' %}" class="ts-project-item">
 							<img src="{% static 'images/team.jpg' %}" alt="Image" class="img-responsive"/>
 							<div class="ts-text">
 								<h2>组队系统</h2>
@@ -167,7 +167,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12" style="vertical-align:middle; height:90px; line-height:90px;">
-							<p class="ts-left"><small>&copy; 2017 <a href="{% static 'https://www.eesast.com' %}">EESAST</a> All Rights Reserved.</small></p>
+							<p class="ts-left"><small>&copy; 2017 <a href="https://www.eesast.com">EESAST</a> All Rights Reserved.</small></p>
 							<p class="ts-right"><small class="ts-right">第十八届队式程序设计大赛公众号&nbsp &nbsp <img src="{% static 'images/公众号二维码1.jpg' %}" alt="二维码"></img> &nbsp &nbsp 内测选手交流群 &nbsp &nbsp <img src="{% static 'images/xs.jpg' %}"></small></p>
 						</div>
 					</div>
