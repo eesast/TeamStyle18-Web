@@ -7,6 +7,7 @@ class Player(models.Model):
     player = models.OneToOneField(User, related_name='playerdata')
     score = models.IntegerField(default=1000)
     ai = models.FileField(upload_to='ai_submit',blank=True,null=True)
+    lasttime = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.player.username
 
@@ -23,7 +24,7 @@ class Record(models.Model):
     result = models.CharField(max_length=1,choices=result_list)
     AI1_scorechange = models.IntegerField(default=0)
     AI2_scorechange = models.IntegerField(default=0)
-    log=models.FileField(upload_to='logs')
+    log = models.FileField(upload_to='logs',blank=True,null=True)
     def __str__(self):
         return u'%s competes %s on %s'%(self.AI1,self.AI2,self.time)
 
