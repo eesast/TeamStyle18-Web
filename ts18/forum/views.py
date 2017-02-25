@@ -35,7 +35,7 @@ def forum_content(request,id):
 				form = CommentForm()
 		commentlist = post.p_comment.all()
 		print(1)
-		return render(request,'forum_content_after_login.html',{'post':post,'commentlist':commentlist})
+		return render(request,'forum_content.html',{'post':post,'commentlist':commentlist})
 	else:
 		commentlist = post.p_comment.all()
 		return render(request,'forum_content.html',{'post':post,'commentlist':commentlist})
@@ -91,7 +91,7 @@ def forum_index(request,page=1):
 		minpage = i
 	pagerange=range(minpage,maxpage+1)
 	if request.user.is_authenticated():
-		return render(request,'forum_index_after_login.html',{"posts":posts,"pagerange":pagerange,})
+		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 	else:
 		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 
@@ -123,7 +123,7 @@ def forum_index_tongzhi(request,page=1):
 		minpage = i
 	pagerange=range(minpage,maxpage+1)
 	if request.user.is_authenticated():
-		return render(request,'forum_index_after_login.html',{"posts":posts,"pagerange":pagerange,})
+		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 	else:
 		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 
@@ -155,7 +155,7 @@ def forum_index_jishu(request,page=1):
 		minpage = i
 	pagerange=range(minpage,maxpage+1)
 	if request.user.is_authenticated():
-		return render(request,'forum_index_after_login.html',{"posts":posts,"pagerange":pagerange,})
+		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 	else:
 		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 
@@ -186,7 +186,7 @@ def forum_index_bug(request,page=1):
 		minpage = i
 	pagerange=range(minpage,maxpage+1)
 	if request.user.is_authenticated():
-		return render(request,'forum_index_after_login.html',{"posts":posts,"pagerange":pagerange,})
+		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 	else:
 		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 
@@ -218,7 +218,7 @@ def forum_index_mypost(request,page=1):
 				break
 			minpage = i
 		pagerange=range(minpage,maxpage+1)
-		return render(request,'forum_index_after_login.html',{"posts":posts,"pagerange":pagerange,})
+		return render(request,'forum_index.html',{"posts":posts,"pagerange":pagerange,})
 	else:
 		pagerange=range(1,2)
 		return render(request,'forum_index.html',{"pagerange":pagerange,})
