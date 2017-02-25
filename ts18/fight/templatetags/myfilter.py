@@ -6,9 +6,7 @@ register = template.Library()
 @register.filter(name='logname')
 def logname(value):
     try:
-        print(value)
         note = Record.objects.get(log=value)
-        print(1)
         return os.path.split(note.log.name)[-1]
     except:
         return None
