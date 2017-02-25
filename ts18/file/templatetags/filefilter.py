@@ -9,7 +9,7 @@ def filename(value):
         note = Notification.objects.get(file_attached=value)
         return os.path.split(note.file_attached.name)[-1]
     except:
-        return none
+        return None
 
 @register.filter(name = 'filelink')
 def filelink(value):
