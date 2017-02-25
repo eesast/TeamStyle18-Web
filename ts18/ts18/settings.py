@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6ogq))efpmgdks1!(=08zx(9w22*qzig&+^bz*+b(^fr2+-21+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if socket.gethostname() == 'eesast.com':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     '.eesast.com',
@@ -66,20 +70,7 @@ REST_FRAMEWORK = {
          'rest_framework.parsers.JSONParser',
      )
  }
- 
-REST_FRAMEWORK = {
-     # Use Django's standard `django.contrib.auth` permissions,
-     # or allow read-only access for unauthenticated users.
-     'DEFAULT_PERMISSION_CLASSES': [
-         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-     ],
-     'DEFAULT_RENDERER_CLASSES': (
-         'rest_framework.renderers.JSONRenderer',
-     ),
-     'DEFAULT_PARSER_CLASSES': (
-         'rest_framework.parsers.JSONParser',
-     )
- }
+
  
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,6 +82,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SESSION_COOKIE_AGE=3600
 ROOT_URLCONF = 'ts18.urls'
 
 TEMPLATES = [
@@ -147,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -171,3 +163,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'eesaster'
+EMAIL_HOST_PASSWORD = 'eesast2017'
+
+SERVER_EMAIL = 'cpclash@eesast.com'
+
+LOGIN_URL = '/login/'
