@@ -5,8 +5,9 @@ app_name = 'fight'
 urlpatterns = [
     url(r'^fight_index$',views.index,name='index'),
     url(r'^fight_myself$',views.myself,name='myself'),
-    url(r'^fight_rank$',views.rank,name='rank'),
-    url(r'^download', views.download, name='download'),
+    url(r'^logdownload', views.logdownload, name='logdownload'),
+    url(r'^aidownload', views.aidownload, name='aidownload'),
+
 ]
 # Create your views here.
 

@@ -109,7 +109,7 @@
 						<li><a href="{% url 'index:rule' %}">规则</a></li>
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
-						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'teams:index' %}">组队</a></li>
 						<li class="active"><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
 						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
@@ -156,7 +156,7 @@
 			<div class=container">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<h2 style="display:inline">对战信息</h2> &nbsp &nbsp &nbsp &nbsp &nbsp <h3 style="display:inline"><a href="{% url 'fight:rank' %}" style="color:#484c50">查看天梯榜</a>
+						<h2 style="display:inline">对战信息</h2> &nbsp &nbsp &nbsp &nbsp &nbsp <h3 style="display:inline">
 						{% if request.user.is_authenticated %}
 						&nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
 						{% endif %}
@@ -173,26 +173,27 @@
 												    <tr>
 													  <th>编号</th>
 													  <th>队名</th>
-													  <th>简介</th>
+													  <th>分数</th>
 													  <th>最近一次提交时间</th>
 													  <th>操作</th>
 													</tr>
 												  </thead>
 												  <tbody>
-													
+												  {% for player in player_list %}
 												    <tr>
-													  <td>10</td>
-													  <td>这里写队名</td>
-													  <td>这里写简介</td>
-													  <td>2017-06-10 18:40</td>
-													  {% if request.user.is_authenticated %}
-													  <td><a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  <td>{{player.id}}</td>
+													  <td>{{player.player.username}}</td>
+													  <td>{{player.score}}</td>
+													  <td>{{player.lasttime}}</td>
+													  <td>
+													  {% if player.ai %}
+													  <a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  {% else %}
+													  尚未上传ai
 													  {% endif %}
-													  {% if not request.user.is_authenticated %}
-													  <td><a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">发起挑战</a>
-													  {% endif %}
+													  </td>
 													</tr>
-													
+													{% endfor %}
 												  </tbody>
 												</table>
 												

@@ -10,15 +10,18 @@ import urllib
 
 
 def index(request):
-    try:
-        data=Player.objects.get(player=request.user)
-    except :
-        data = Player(player = request.user)
-        data.save()
     has_submitted=False
+    if request.user.is_authenticated():
+        try:
+            data=Player.objects.get(player=request.user)
+        except :
+            data = Player(player = request.user)
+            data.save()
+        if request.user.playerdata.ai!=None:
+            has_submitted=True
+
     players_list=Player.objects.exclude(ai = None)
-    if request.user.playerdata.ai!=None:
-        has_submitted=True
+
     if request.method=='POST':
         compete_id=request.POST.get('compete_id','')
         try:
@@ -92,7 +95,6 @@ def Get_AI(request):
     data.save()
 
 def myself(request):
-    print(request.user.username)
     try:
         data=Player.objects.get(player=request.user)
     except :
@@ -102,35 +104,29 @@ def myself(request):
     record_list=[]
     records=[]
     record_list=request.user.playerdata.ai1_record.all()
-    print(record_list)
     record_list2=request.user.playerdata.ai2_record.all()
     record_list = sorted(chain(record_list,record_list2), key=attrgetter('time'),reverse=False)
-    print(record_list)
 
-    try:
-        record_list=request.user.ai2_record.all()
-    except:
-        pass
     if not record_list==[]:
         for record in record_list:
             r={}
             r['time']=record.time
             r['log']=record.log
-            if record.AI1==request.user:
+            if record.AI1==request.user.playerdata:
                 r['scorechange']=record.AI1_scorechange
                 r['competitor']=record.AI2
                 if record.result=='0':
                     r['result']='胜利'
-                if record['result']=='1':
+                if record.result=='1':
                     r['result']='失败'
                 else:
                     r['result']='平局'
-            if record.AI2==request.user:
+            if record.AI2==request.user.playerdata:
                 r['scorechange']=record.AI2_scorechange
                 r['competitor']=record.AI1
-                if record['result']=='1':
+                if record.result=='1':
                     r['result']='胜利'
-                if record['result']=='0':
+                if record.result=='0':
                     r['result']='失败'
                 else:
                     r['result']='平局'
@@ -143,26 +139,39 @@ def myself(request):
 
     return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
 
-
-
-def download(request):
+def aidownload(request):
     try:
         filename = request.GET['file']
     except:
         raise Http404
-    log = get_object_or_404(Record, log=filename)
-    path = log.log.path
+    player = get_object_or_404(Player, ai=filename)
+    path = player.ai.path
     name = os.path.split(path)[-1]
     name = urllib.parse.quote(name)
 
     wrapper = FileWrapper(open(path, 'rb'))
     response = HttpResponse(wrapper)
-    response['Content-Length'] = log.log.size
+    response['Content-Length'] = player.ai.size
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(os.path.split(name)[-1])
     return response
 
-def rank(request):
-    return None
+def logdownload(request):
+    try:
+        filename = request.GET['file']
+    except:
+        raise Http404
+    Log = get_object_or_404(Record, log=filename)
+    path = Log.log.path
+    name = os.path.split(path)[-1]
+    name = urllib.parse.quote(name)
+
+    wrapper = FileWrapper(open(path, 'rb'))
+    response = HttpResponse(wrapper)
+    response['Content-Length'] = Log.log.size
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(os.path.split(name)[-1])
+    return response
+
 
 # Create your views here.

@@ -58,7 +58,7 @@
 						<li><a href="{% url 'index:rule' %}">规则</a></li>
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
-						<li><a href="{% url 'team:index' %}">组队</a></li>
+						<li><a href="{% url 'teams:index' %}">组队</a></li>
 						<li class="active"><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
 						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
@@ -106,7 +106,7 @@
 				<div class="row">
 					<div class="col-md-12">
 					{% load myfilter %}
-					    <a href="{{ player.ai.name|filelink }}">{{ player.ai.name|filename }}</a>
+					    <a href="{{ player.ai.name|ailink }}">{{ player.ai.name|ainame }}</a>
 						<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<h3>选择要提交的代码文件</h3>
@@ -137,7 +137,7 @@
 									<td>{{record.competitor}}</td>
 									<td>{{record.result}}</td>
 									<td>{{record.scorechange}}</td>
-									<td></td>
+									<td><a href="{{ record.log.name|loglink }}">{{ record.log.name|logname }}</a></td>
 								</tr>
 								{% endfor %}
 							</tbody>
