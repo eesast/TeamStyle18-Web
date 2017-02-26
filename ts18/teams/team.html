@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TeamStyle18</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TeamStyle18" />
+
+ 
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<!-- Flexslider -->
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+   
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+
+	<!-- 
+		INFO:
+		Add 'boxed' class to body element to make the layout as boxed style.
+		Example: 
+		<body class="boxed">	
+	-->
+	<body>
+
+	<!-- Loader -->
+	<div class="ts-loader"></div>
+	
+	<div id="ts-page">
+		<section id="ts-header">
+			<div class="container">
+				<nav role="navigation">
+					<ul class="pull-left left-menu">
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li class="active"><a href="{% static 'teams:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
+						<li><a href="https://www.eesast.com">About</a></li>
+			<!--			<li><a href="{% static 'index:contact' %}">Contact</a></li>       -->
+					</ul>
+					
+					<ul class="pull-right right-menu">
+						<li><a href="{% url 'login:login' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<!-- #ts-header -->
+
+		<section id="ts-hero" class="no-js-fullheight" style="background-image: url({% static 'images/team_full.jpg' %});" data-next="yes">
+			<div class="ts-overlay"></div>
+			<div class="container">
+				<div class="ts-intro no-js-fullheight">
+					<div class="ts-intro-text">
+						
+						<div class="ts-center-position">
+							<h2 class="animate-box">组队系统</h2>
+							<h3 class="animate-box">Cooperated so you are strong, separated so you are weak</h3>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ts-learn-more animate-box">
+				<a href="#" class="scroll-btn">
+					<span class="text">Explore more about us</span>
+					<span class="arrow"><i class="icon-chevron-down"></i></span>
+				</a>
+			</div>
+		</section>
+		<!-- END #ts-hero -->
+		
+		<section id="ts-about">
+			<div class=container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2 style="text-align:center;">内测为个人赛，组队系统将在正式比赛开启后开放</h2>
+											   
+												
+												
+						</div>
+					</div>
+				</div>
+			</section>
+		
+		
+	
+		<footer id="ts-footer">
+			<div class="ts-copyright animate-box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<p class="ts-left"><small>&copy; 2017 <a href="https://www.eesast.com">EESAST</a> All Rights Reserved.</small></p>
+							<p class="ts-right"><small class="ts-right">第十八届队式程序设计大赛</small></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- END #ts-footer -->
+	</div>
+	<!-- END #ts-page -->
+	
+
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js'% }"></script>
+	<!-- Flexslider -->
+	<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+
+
+
+	<!-- Main JS (Do not remove) -->
+	<script src="{% static 'js/main.js' %}"></script>
+
+	
+
+	</body>
+</html>
