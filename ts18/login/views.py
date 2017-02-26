@@ -84,7 +84,6 @@ def Login(request):
                     error = '登录申请失败！请确认用户名与密码是否正确，以及学号与姓名信息是否完整!'
     else:
         form = LoginForm()#首次登陆，GET请求
-    error='1'
     return render(request, 'login.html', {'error':error})
 
 def Get_Image(request):
