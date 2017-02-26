@@ -158,15 +158,15 @@
 																								</div>
 					<div id="pagination">
 													{%if posts.has_previous %}
-														<a href="community_index?page={{posts.previous_page_number}}" class="btn">上一页</a>
+														<a href="forum_index?page={{posts.previous_page_number}}" class="btn">上一页</a>
 													{% endif %}
 														{% for i in pagerange %}
-                                                        <a href="community_index?page=i" class="btn active">{{i}}</a>
+                                                        <a href="forum_index?page=i" class="btn active">{{i}}</a>
                                                         {% endfor %}
                                                     {%if posts.has_next %}
-														<a href="community_index?page={{posts.next_page_number}}" class="btn">下一页</a>
+														<a href="forum_index?page={{posts.next_page_number}}" class="btn">下一页</a>
 													{% endif %}
-                                                        <a href="community_index?page={{posts.paginator.num_pages}}" class="btn">最后页</a>
+                                                        <a href="forum_index?page={{posts.paginator.num_pages}}" class="btn">最后页</a>
                                                 </div>
 				</div>
 			</div>
