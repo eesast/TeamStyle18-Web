@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, pre_time_choice
+from .models import Team
 
 
 class CreateForm(forms.Form):
