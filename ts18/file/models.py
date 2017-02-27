@@ -6,6 +6,7 @@ class Notification(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(blank=True, null=True)
     file_attached = models.FileField(upload_to='uploads', blank=True)
+    time_attached = models.DateTimeField(auto_now=True)
 
 
     def __unicode__(self):
