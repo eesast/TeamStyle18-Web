@@ -13,25 +13,39 @@
 
  
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
 	<!-- Flexslider -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
    
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<style>
+				#inputcode {
+				display:none;
+				position:fixed;
+				bottom:50%;
+				left:30%;
+				border: 0.2px solid;
+				border-radius:2px;
+				background-color:#fff;
+				width:40%;
+				z-index:1000;
+				padding:15px;
+				}
+                </style>
 
 	</head>
 
@@ -51,27 +65,32 @@
 			<div class="container">
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="intro.html">介绍</a></li>
-						<li><a href="rule.html">规则</a></li>
-						<li><a href="file.html">文件</a></li>
-						<li><a href="forum_index.html">论坛</a></li>
-						<li class="active"><a href="team_index.html">组队</a></li>
-						<li><a href="fight.html">对战</a></li>
+						<li><a href="{% url 'index:index' %}">Home</a></li>
+						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+						<li><a href="{% url 'index:rule' %}">规则</a></li>
+						<li><a href="{% url 'file:notice' %}">文件</a></li>
+						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
+						<li class="active"><a href="{% url 'teams:index' %}">组队</a></li>
+						<li><a href="{% url 'fight:index' %}">对战</a></li>
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
 					</ul>
 					
 					<ul class="pull-right right-menu">
-						<li><a href="login.html">Login</a></li>
-						<li class="ts-cta-btn"><a href="#">Sign up</a></li>
+						{% if request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Welcome!&nbsp &nbsp {{request.user.username}}</a></li>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Login</a></li>
+						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
 		</section>
 		<!-- #ts-header -->
 
-		<section id="ts-hero" class="no-js-fullheight" style="background-image: url(images/team_full.jpg);" data-next="yes">
+		<section id="ts-hero" class="no-js-fullheight" style="background-image: url({% static 'images/team_full.jpg' %});" data-next="yes">
 			<div class="ts-overlay"></div>
 			<div class="container">
 				<div class="ts-intro no-js-fullheight">
@@ -111,191 +130,41 @@
 													</tr>
 												  </thead>
 												  <tbody>
+												  {% for team in team_list %}
 												    <tr>
+													
 													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
+													  <td>{{team.name}}</td>
+													  <td>{{team.leader.username}}</td>
+													  <td>{{team.intro}}</td>
+													  <td>{{team.members.count}}</td>
+													  <td><a href="javascript:(0);" onclick="document.getElementById('inputcode').style.display='block';">加入</a>
 													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													  <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													<td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													<td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
-													<tr>
-													 <td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr><tr>
-													<td>1</td>
-													  <td>这里写队名</td>
-													  <td>这里写队长</td>
-													  <td>这里写简介</td>
-													  <td>这里写成员数</td>
-													  <td><a href="team_info.html?team.name">查看</a>&nbsp&nbsp<a href="team_join.html?team.name">加入</a>
-													</tr>
+												  {% endfor %}
 												  </tbody>
 												</table>
 												
-												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="team_create.html" style="color: #FFFFFF">创建自己的队伍</a></button>
-												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="team_people.html" style="color: #FFFFFF">去人才市场看看</a></button>
-												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:50px;"><a href="team_sellself.html" style="color: #FFFFFF">我要上人才市场</a></button>
-								<h2>有队伍向你发出邀请</h2>
-                                <table class="table table-bordered table-striped">
-											        <thead>
+												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="{% url 'teams:create' %}" style="color: #FFFFFF">创建自己的队伍</a></button>
+												
 								
-													  <tr>
-													    <td>队名</td>
-														<td>队伍简介</td>
-														<td>邀请词</td>
-														<td>操作</td>
-													  </tr>
-													</thead>
-													<tbody>
-                                                    
-                                                    <tr>
-													    <td>1234</td>
-														<td>我们帅</td>
-														<td>看你帅</td>
-														<td>
-														  <form action="#" method="post" style="display:inline;">
-                                                            {% csrf_token %}
-														    <input type="hidden" name="app_id" value="{{applier.id}}"> 
-											                <input type="hidden" name="answer" value="agree"> 
-											                <button class="btn btn-sm btn-info" onclick="form.submit();" title="同意">同意</button>
-											              </form>
-                                                          <form action="#" method="post" style="display:inline;" >
-                                                            {% csrf_token %}
-														    <input type="hidden" name="app_id" value="{{applier.id}}"> 
-											                <input type="hidden" name="answer" value="disagree"> 
-											                <button class="btn btn-sm btn-info" onclick="form.submit();" title="拒绝">拒绝</button>
-											              </form>
-														</td>
-													  </tr>
-													 
-													</tbody>
-												</table>													
 						</div>
+						
+															<div id="inputcode">
+																<div class="container">
+																<div class="row">
+																	<div class="col-md-10">
+																	<form action="#" method="post">
+																	<div class="col-md-6" style="margin:20px;">
+																	<h3>请输入邀请码</h3>
+																	
+																	<input type="password" name="code" id="code" class="email required input-xlarge" value="" title="" style="height:30px; width:60%;"> 
+																	<br>
+																	<input type="submit" name="submit" value="提交申请" class="btn btn-primary btn-md" style="margin-top:17px;">
+																	</div>
+																	</div>
+																</div>
+																</div>
+															</div>				
 					</div>
 				</div>
 			</section>
@@ -320,17 +189,17 @@
 	
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
 	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
+	<script src="{% static 'js/main.js' %}"></script>
 
 	
 
