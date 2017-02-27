@@ -117,7 +117,7 @@
 						<table class="table table-bordered table-content">
 							<thead>
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap; width:12%; ">楼主<hr>
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap; width:12%; vertical-align:middle; ">
 									<div style="text-align:center;">
 									{{post.sender}}<br>
 									<img src="{{post.sender.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
@@ -136,7 +136,7 @@
 								{% if commentlist %}
 								{% for comment in commentlist %}
 								<tr>
-									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap;">1楼 <hr><div style="text-align:center;">
+									<td style="background-color:#F2F2F2; font-family:SimHei; white-space:nowrap; vertical-align:middle;"><div style="text-align:center;">
 									{{comment.replier}}<br>
 									<img src="{{comment.replier.profile.image.url}}" alt="头像" style="width:100px; height:100px; border-radius:100px; padding-top:10px;"></img>
 									<p style="margin-top:14px; font-size:15px; font-family: Arial;">{{comment.replytime}}</p>
