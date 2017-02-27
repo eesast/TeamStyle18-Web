@@ -6,7 +6,7 @@ from django.db import models
 class Player(models.Model):
     player = models.OneToOneField(User, related_name='playerdata')
     score = models.IntegerField(default=1000)
-    ai = models.FileField(upload_to='ai_submit',blank=True,null=True)
+    ai = models.FileField(upload_to='submits',blank=True,null=True)
     lasttime = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.player.username

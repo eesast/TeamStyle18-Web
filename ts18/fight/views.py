@@ -62,7 +62,7 @@ def Get_AI(request):
         return '请上传cpp或c格式的文件'
     # for compatibale reason
     if old_name.startswith('/'):
-        request.user.playerdata.ai.name = os.path.join('ai_submit', os.path.split(old_name)[-1])
+        request.user.playerdata.ai.name = os.path.join('submits', os.path.split(old_name)[-1])
         request.user.playerdata.save()
     try:
         old_path = request.user.playerdata.ai.path
@@ -79,9 +79,9 @@ def Get_AI(request):
     # at a required place (using os.rename)
     suffix = name.split('.')[-1]
     request.user.playerdata.ai.name=os.path.join(
-        'ai_submit',
-        'ai_%s_%s.%s' % (request.user.username, request.user.id, suffix)
-    )
+        'submits',
+        '%s_%s' % (request.user.username, request.user.id), '%s.%s' % ('playerMain', suffix))
+
     new_path=os.path.join(settings.MEDIA_ROOT, request.user.playerdata.ai.name)
     if os.path.exists(new_path):
         os.remove(new_path)
