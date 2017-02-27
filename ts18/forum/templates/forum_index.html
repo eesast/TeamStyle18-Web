@@ -76,8 +76,13 @@
 					</ul>
 					
 					<ul class="pull-right right-menu">
+						{% if request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Welcome!&nbsp &nbsp {{request.user.username}}</a></li>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
 						<li><a href="{% url 'login:login' %}">Login</a></li>
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
