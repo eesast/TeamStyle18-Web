@@ -63,7 +63,7 @@ def index(request):
                 return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
         running = request.user.playerdata.running
-        if has_submitted==True and running == False:
+        if has_submitted == True and request.user.playerdata.running == False:
             error = ''
             cpl = subprocess.run('submits/compile.sh %s_%s' % (request.user.username, request.user.id),
                                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -76,11 +76,14 @@ def index(request):
                                        stderr=subprocess.STDOUT)
 
                 if fight.returncode == 0:  # process running
-                    running = True
-                    rpyNumber = request.user.playerdata.rpyNumber
-                    rpyNumber = fight.stdout.decode('utf-8')
-                    rpyNumber.save()
-                    running.save()
+                    request.user.playerdata.running = True
+                    rpN =  fight.stdout.decode('utf-8')
+                    request.user.playerdata.rpyNumber = rpN
+                    request.user.playerdata.save()
+                    r = Record(AI1=request.user.playerdata,
+                               AI2=competitor,
+                               rpyNumber=rpN)
+                    r.save()
                 else:
                     error = fight.stdout.decode('utf-8')
             else:
@@ -200,9 +203,20 @@ def myself(request):
 
     if running == True:
         # search the rpyfile and print the process
-        if os.path.exists(os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.rpy')):
-            running = False
-            running.save()
+        rpyPath = os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.rpy')
+        if os.path.exists(rpyPath):
+            request.user.playerdata.update(running = False)
+            r = Record.objects.get(rpyNumber=request.user.playerdata.rpyNumber)
+            r.log.path = rpyPath
+            r.log.name = request.user.playerdata.rpyNumber+'.rpy'
+            with open(os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.txt'),'r') as f:
+                lines = f.readlines()
+                last = lines[-1]
+                if '0' in last:
+                    r.scorechange = 1 # AI1 wins
+                elif '1' in last:
+                    r.scorechange = -1 # AI2 wins
+            r.save()
             return HttpResponseRedirect(reverse('fight:myself'))
 
     return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records, 'running':running})
