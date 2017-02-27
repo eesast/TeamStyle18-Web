@@ -133,7 +133,7 @@
 												  {% for team in team_list %}
 												    <tr>
 													
-													  <td>1</td>
+													  <td>{{ forloop.counter }}</td>
 													  <td>{{team.name}}</td>
 													  <td>{{team.leader.username}}</td>
 													  <td>{{team.intro}}</td>
