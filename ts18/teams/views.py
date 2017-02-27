@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .models import Team
+from .forms import CreateForm
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-import hashlib
 
 
 def if_in_team(user):
@@ -22,7 +22,6 @@ def get_user_info(user):
         team = ''
         if is_leader:
             team = user.leads
-            app_list = team.application_set.all()
         else:
             teams = user.in_team.all()
             for t in teams:
@@ -46,14 +45,8 @@ def index(request):
 
     if request.method == 'POST':
        code = request.POST['code']
-       foundTeam = Team.objects.filter(invitationCode=code)
-       if not foundTeam.count():
-           note = '错误的邀请码'
-       else:
-           team = foundTeam[0]
-           if team.is_full:
-               note = '队伍已满'
-       if not note:
+       team = Team.get_object_or_404(pk=request.POST['id'])
+       if code == team.invitationCode:
           team.members.add(request.user)
           if team.members.count() >= 3:
               team.is_full = True
@@ -62,7 +55,8 @@ def index(request):
 
 
     teams = Team.objects.all()
-    return render(request, 'team_index.html', {'teams':teams, 'note':note})
+    in_team = if_in_team(request.user)
+    return render(request, 'team_index.html', {'teams':teams, 'in_team':in_team})
 
 
 
@@ -74,6 +68,7 @@ def create(request):
     if request.method == 'POST':
         form = CreateForm(request.POST)
         if form.is_valid():
+            print('1')
             cd = form.cleaned_data
             name = cd['name']
             intro = cd['intro']
@@ -94,7 +89,7 @@ def create(request):
                 team.save()
                 request.user.profile.is_leader = True
                 request.user.profile.save()
-                return HttpResponseRedirect(reverse('teams:my_team'))
+                return HttpResponseRedirect(reverse('teams:myteam'))
 
 
     return render(request, 'team_create.html', {'form': form})

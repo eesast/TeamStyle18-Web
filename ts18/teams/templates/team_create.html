@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -107,10 +108,11 @@
 						<p>创建一支属于自己的队伍并招募小伙伴！</p>
 					</div>
 					<div class="col-md-10 col-md-offset-1">
-						<form id="contact-form" class="row" action="#" method="post">
+                        <form id="contact-form" class="row" action="{% url 'teams:create' %}" method="post">
+                            {% csrf_token %}
 
                                                         <div class="col-md-6">
-                                                                <label for="email">队伍名称 <span>*</span></label>
+                                                                <label for="name">队伍名称 <span>*</span></label>
                                                         </div>
                                                         <div class="col-md-10">
                                                                 <input type="text" name="name" id="name" class="email required input-xlarge" value="" title="* Please provide a name" style="height:30px; width:50%;">
@@ -118,17 +120,17 @@
 
   
                                                         <div class="col-md-6">
-                                                                <label for="message">队伍简介 <span>*</span> </label>
+                                                                <label for="intro">队伍简介 <span>*</span> </label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                                <textarea name="message" id="message" class="required span6" rows="6" title="* Please enter your message" style="width:100%; margin-bottom:20px" rows="8"></textarea>
+                                                                <textarea name="intro" id="intro" class="required span6" rows="6" title="* Please enter your message" style="width:100%; margin-bottom:20px" rows="8"></textarea>
                                                         </div>
 														
 														<div class="col-md-6">
-                                                                <label for="email">邀请码 <span>*</span></label>
+                                                                <label for="code">邀请码 <span>*</span></label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                                <input type="password" name="code" id="code" class="email required input-xlarge" value="" title="" style="height:30px; width:50%;">
+                                                                <input type="text" name="code" id="code" class="email required input-xlarge" value="" title="" style="height:30px; width:50%;">
                                                         </div>
 														
 														<div class="col-md-10">
