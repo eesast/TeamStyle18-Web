@@ -106,7 +106,9 @@
 				<div class="row">
 					<div class="col-md-12">
 					{% load myfilter %}
+						{% if request.user.playerdata.ai %}
 					    <a href="{{ player.ai.name|ailink }}">{{ player.ai.name|ainame }}</a>
+						{% endif %}
 						<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<h3>选择要提交的代码文件</h3>

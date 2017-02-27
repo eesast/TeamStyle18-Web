@@ -168,9 +168,10 @@
 					</div>
 					<div class="col-md-12" style="margin-top:40px;">
 						<form id="reply-form" class="row" action="#" method="post">
+						{% csrf_token %}
 						<h3>回复楼主</h3>
                                                         
-                                                       <textarea title="* Please enter your message" style="width:100%; margin-bottom:20px" rows="10"></textarea>
+                                                       <textarea title="* Please enter your message" name="comment" id="comment" style="width:100%; margin-bottom:20px" rows="10"></textarea>
                                                        
                                                         <br>
                                                         

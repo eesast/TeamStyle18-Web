@@ -1,13 +1,13 @@
 from django.contrib import admin
-from fight import models
-class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('player','score','ai')
+from forum import models
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('id','title','sender','timestamp','category')
 
-class RecordAdmin(admin.ModelAdmin):
-    list_display = ('AI1','AI2','time','result','AI1_scorechange','AI2_scorechange','log')
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id','replier','content','replytime')
 
-admin.site.register(models.Player,PlayerAdmin)
-admin.site.register(models.Record,RecordAdmin)
+admin.site.register(models.Post,PostAdmin)
+admin.site.register(models.Comment,CommentAdmin)
 
 
 # Register your models here.
