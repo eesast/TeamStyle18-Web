@@ -58,7 +58,7 @@ def Get_AI(request):
     except :
         data = Player(player = request.user)
         data.save()
-    old_name = data.ai.name
+    old_name = request.user.playerdata.ai.name
     if not 'aiupload' in request.FILES:
         return '请上传一个文件'
 
@@ -69,30 +69,32 @@ def Get_AI(request):
         return '请上传cpp或c格式的文件'
     # for compatibale reason
     if old_name.startswith('/'):
-        data.ai.name = os.path.join('ai_submit', os.path.split(old_name)[-1])
-        data.save()
+        request.user.playerdata.ai.name = os.path.join('ai_submit', os.path.split(old_name)[-1])
+        request.user.playerdata.save()
     try:
-        old_path = data.ai.path
+        old_path = request.user.playerdata.ai.path
         if os.path.exists(old_path):
             os.remove(old_path)
     except:
         pass
-
     # bind the new avatar to profile
-    data.ai=file
-    data.save()
-    initial_path=data.ai.path
+    request.user.playerdata.ai=file
+    request.user.playerdata.save()
+    initial_path=request.user.playerdata.ai.path
 
     # rename the new avatar to a regular name, and meanwhile, place the avatar
     # at a required place (using os.rename)
     suffix = name.split('.')[-1]
-    data.ai.name=os.path.join(
+    request.user.playerdata.ai.name=os.path.join(
         'ai_submit',
         'ai_%s_%s.%s' % (request.user.username, request.user.id, suffix)
     )
-    new_path=os.path.join(settings.MEDIA_ROOT, data.ai.name)
+    new_path=os.path.join(settings.MEDIA_ROOT, request.user.playerdata.ai.name)
+    if os.path.exists(new_path):
+        os.remove(new_path)
     os.rename(initial_path,new_path)
-    data.save()
+    request.user.playerdata.save()
+    request.user.save()
 
 def myself(request):
     try:

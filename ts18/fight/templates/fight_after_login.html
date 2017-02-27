@@ -165,12 +165,21 @@
 													  <td>{{player.score}}</td>
 													  <td>{{player.lasttime}}</td>
 													  <td>
+													  {% ifnotequal player.player request.user %}
 													  {% if player.ai %}
 													  <a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
 													  {% else %}
 													  尚未上传ai
 													  {% endif %}
+													  {% endifnotequal %}
+													  
+													  {% ifequal player.player request.user %}
+													  再接再厉！
+													  {% endifequal %}
 													  </td>
+													  {% ifequal player.player request.user %}
+													  再接再厉！
+													  {% endifequal %}
 													</tr>
 													{% endfor %}
 												  </tbody>
