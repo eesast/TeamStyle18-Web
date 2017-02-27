@@ -30,6 +30,7 @@ else:
     DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '.eesast.com',
 ]
 
