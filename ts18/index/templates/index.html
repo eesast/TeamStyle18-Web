@@ -54,19 +54,24 @@
 				<nav role="navigation">
 					<ul class="pull-left left-menu">
 						<li><a href="https://www.eesast.com">About</a></li>
-						<li><a href="{% url 'contact:contact' %}">Contact</a></li>
+		<!--				<li><a href="{% url 'contact:contact' %}">Contact</a></li>     -->
 					</ul>
 					<h1 id="ts-logo"><a href="{% url 'index:index' %}">TeamStyle</a></h1>
 					<ul class="pull-right right-menu">
+					{% if not request.user.is_authenticated %}
 						<li><a href="{% url 'login:login' %}">Login</a></li>
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
+					{% endif %}
+					{% if request.user.is_authenticated %}
+						<li><a href="{% url 'login:login' %}">Welcome</a></li>
+					{% endif %}
 					</ul>
 				</nav>
 			</div>
 		</section>
 		<!-- #ts-header -->
 
-		<section id="ts-hero" class="js-fullheight" style="background-image: url({% static 'images/hacker.jpg' %});" data-next="yes">
+		<section id="ts-hero" class="js-fullheight" style="background-image: url({% static 'images/code.jpg' %});" data-next="yes">
 			<div class="ts-overlay"></div>
 			<div class="container">
 				<div class="ts-intro js-fullheight">
