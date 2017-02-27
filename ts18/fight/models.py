@@ -7,6 +7,8 @@ class Player(models.Model):
     player = models.OneToOneField(User, related_name='playerdata')
     score = models.IntegerField(default=1000)
     ai = models.FileField(upload_to='submits',blank=True,null=True)
+    running = models.BooleanField(default=False)
+    rpyNumber = models.CharField(default='', max_length=100)
     lasttime = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.player.username
