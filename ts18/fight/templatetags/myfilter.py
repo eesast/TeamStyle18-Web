@@ -1,6 +1,6 @@
 from django import template
 from fight.models import Player, Record
-import os
+import os, socket
 register = template.Library()
 
 @register.filter(name='logname')
@@ -15,7 +15,10 @@ def logname(value):
 def loglink(value):
     try:
         note = Record.objects.get(log=value)
-        return 'https://cpclash.eesast.com/logdownload/?file={0}'.format(note.ai.name)
+        if socket.gethostname() == 'eesast.com':
+            return 'https://cpclash.eesast.com/logdownload/?file={0}'.format(note.ai.name)
+        else:
+            return 'localhost:8000/logdownload/?file={0}'.format(note.ai.name)
     except:
         return None
 
@@ -31,6 +34,9 @@ def ainame(value):
 def ailink(value):
     try:
         note = Player.objects.get(ai=value)
-        return 'https://cpclash.eesast.com/aidownload/?file={0}'.format(note.ai.name)
+        if socket.gethostname() == 'eesast.com':
+            return 'https://cpclash.eesast.com/aidownload/?file={0}'.format(note.ai.name)
+        else:
+            return 'localhost:8000/aidownload/?file={0}'.format(note.ai.name)
     except:
         return None

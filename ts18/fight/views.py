@@ -35,17 +35,10 @@ def index(request):
             pass#接入api
 
 
-        if request.user.is_authenticated():
-            return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
-        else:
-            return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
-
+    if request.user.is_authenticated():
+        return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
     else:
-        if request.user.is_authenticated():
-            return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
-        else:
-            return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
-
+        return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
 
 
@@ -62,8 +55,8 @@ def Get_AI(request):
     if not 'aiupload' in request.FILES:
         return '请上传一个文件'
 
-    file=request.FILES['aiupload']
-    name=file.name.lower()
+    new_ai=request.FILES['aiupload']
+    name=new_ai.name.lower()
 
     if not name.endswith(('.cpp','.c')):
         return '请上传cpp或c格式的文件'
@@ -78,7 +71,7 @@ def Get_AI(request):
     except:
         pass
     # bind the new avatar to profile
-    request.user.playerdata.ai=file
+    request.user.playerdata.ai=new_ai
     request.user.playerdata.save()
     initial_path=request.user.playerdata.ai.path
 
@@ -115,20 +108,20 @@ def myself(request):
             r['time']=record.time
             r['log']=record.log
             if record.AI1==request.user.playerdata:
-                r['scorechange']=record.AI1_scorechange
+                r['scorechange']=record.scorechange
                 r['competitor']=record.AI2
-                if record.result=='0':
+                if record.scorechange>0:
                     r['result']='胜利'
-                if record.result=='1':
+                elif record.scorechange<0:
                     r['result']='失败'
                 else:
                     r['result']='平局'
             if record.AI2==request.user.playerdata:
-                r['scorechange']=record.AI2_scorechange
+                r['scorechange']=-record.scorechange
                 r['competitor']=record.AI1
-                if record.result=='1':
+                if record.scorechange<0:
                     r['result']='胜利'
-                if record.result=='0':
+                elif record.scorechange>0:
                     r['result']='失败'
                 else:
                     r['result']='平局'
@@ -176,4 +169,3 @@ def logdownload(request):
     return response
 
 
-# Create your views here.
