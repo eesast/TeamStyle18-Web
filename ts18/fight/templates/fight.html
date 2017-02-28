@@ -63,10 +63,10 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-		function getandpost(url,num)
+		function getandpost(num)
 		{
 			var tempform=document.createElement('form');
-			tempform.action=url;
+			tempform.action="{% url '' %}";
 			tempform.method="post";
 			tempform.display.style="none";
 			var opt=document.createElement('input');
@@ -188,7 +188,12 @@
 													  <td>
 													  {% ifnotequal player.player request.user %}
 													  {% if player.ai %}
-													  <a href="javascript:void(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;">
+                                                            {% csrf_token %}
+														    <input type="hidden" name="id" value="{{player.id}}">  
+											                <button class="btn btn-md btn-info" onclick="form.submit();" title="发起挑战">发起挑战</button>
+											           </form>
+													   </td>
 													  {% else %}
 													  尚未上传ai
 													  {% endif %}
