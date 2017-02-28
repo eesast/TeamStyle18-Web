@@ -66,7 +66,7 @@
 		function getandpost(num)
 		{
 			var tempform=document.createElement('form');
-			tempform.action="{% url '' %}";
+			tempform.action="{% url 'fight:index' %}";
 			tempform.method="post";
 			tempform.display.style="none";
 			var opt=document.createElement('input');

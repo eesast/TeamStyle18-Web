@@ -169,7 +169,7 @@
                                                           尚未上传ai
 													  {% else %}
                                                           {% ifnotequal player.player request.user %}
-                                                              <a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+                                                              <a href="javascript:(0)" onclick="getandpost('#',{{player.id}})">发起挑战</a>
                                                           {% endifnotequal %}
                                                           {% ifequal player.player request.user %}
                                                               再接再厉！
