@@ -140,12 +140,12 @@ def Get_AI(request):
     # rename the new avatar to a regular name, and meanwhile, place the avatar
     # at a required place (using os.rename)
     pathdir = os.path.join(
-        settings.MEDIA_ROOT, 'submits', '%s_%s' % (request.user.username, request.user.id))
+        settings.BASE_DIR, '..','..','ts18','submits', '%s_%s' % (request.user.username, request.user.id))
     request.user.playerdata.ai.name=os.path.join(
         'submits',
         '%s_%s' % (request.user.username, request.user.id),'playerMain.cpp')
 
-    new_path=os.path.join(settings.MEDIA_ROOT, request.user.playerdata.ai.name)
+    new_path=os.path.join(pathdir, 'playerMain.cpp')
 
     if not os.path.exists(pathdir):
         os.mkdir(pathdir)
@@ -203,9 +203,9 @@ def myself(request):
 
     if running == True:
         # search the rpyfile and print the process
-        rpyPath = os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.rpy')
+        rpyPath = os.path.join(settings.BASE_DIR, '..', '..', 'fight_result', request.user.playerdata.rpyNumber+'.rpy')
         if os.path.exists(rpyPath):
-            request.user.playerdata.update(running = False)
+            request.user.playerdata.update(running=False)
             r = Record.objects.get(rpyNumber=request.user.playerdata.rpyNumber)
             r.log.path = rpyPath
             r.log.name = request.user.playerdata.rpyNumber+'.rpy'
@@ -219,7 +219,7 @@ def myself(request):
             r.save()
             return HttpResponseRedirect(reverse('fight:myself'))
 
-    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records, 'running':running})
+    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records })
 
 def aidownload(request):
     try:
