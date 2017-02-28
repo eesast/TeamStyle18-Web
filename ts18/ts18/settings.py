@@ -173,10 +173,14 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = BASE_DIR
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ADMINS = (
+    ('Yufeng Huang', 'mildwindyu@hotmail.com'),
+	('Zhao Wang', 'thuzhaowang@163.com'),
+    ('Zefang Zong', 'zongzefang@hotmail.com'),
 
 MEDIA_URL = '/media/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
