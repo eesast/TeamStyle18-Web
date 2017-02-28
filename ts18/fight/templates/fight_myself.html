@@ -118,7 +118,7 @@
 		<section id="ts-about">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+						<div class="col-md-12">
 					{% load myfilter %}
 						{% if request.user.playerdata.ai %}
 					    <a href="{{ player.ai.name|ailink }}">{{ player.ai.name|ainame }}</a>
@@ -129,11 +129,13 @@
 						
 						<input id="uploadFile" type="file" name="aiupload">
 						<input type="submit" name="submit" value="提交文件" class="btn btn-primary btn-md" style="margin-top:20px;">
+
+						<p>{{error}}</p>
 						{% if error %}
 						<script language="javascript">
 							document.getElementById('showerror').style.display='block';
 						</script>
-						{% endif %}
+						{% endif %} 
 						</form>
 					</div>
 					<div class="col-md-12" style="margin-top:40px;">

@@ -60,34 +60,24 @@ def index(request):
         except Player.DoesNotExsit:
             return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
-        running = request.user.playerdata.running
         if has_submitted == True and request.user.playerdata.running == False:
-            error = ''
-            print(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id))
-            cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id),
-                                         shell=True, stdout=subprocess.PIPE)
-
-            if cpl.returncode == 0: #compile completed
-                fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
-                                              (request.user.username, request.user.id,
-                                              competitor.player.username, competitor.player.id),
-                                       shell=True,
-                                       stdout=subprocess.PIPE,
-                                       )
-
-                if fight.returncode == 0:  # process running
-                    request.user.playerdata.running = True
-                    rpN =  fight.stdout.decode('utf-8')
-                    request.user.playerdata.rpyNumber = rpN
-                    request.user.playerdata.save()
-                    r = Record(AI1=request.user.playerdata,
-                               AI2=competitor,
-                               rpyNumber=rpN)
-                    r.save()
-                else:
-                    error = 'run fail,' + fight.stdout.decode('utf-8')
+            fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
+                                          (request.user.username, request.user.id,
+                                          competitor.player.username, competitor.player.id),
+                                   shell=True,
+                                   stdout=subprocess.PIPE,
+                                   )
+            if fight.returncode == 0:  # process running
+                request.user.playerdata.running = True
+                rpN =  fight.stdout.decode('utf-8')
+                request.user.playerdata.rpyNumber = rpN
+                request.user.playerdata.save()
+                r = Record(AI1=request.user.playerdata,
+                           AI2=competitor,
+                           rpyNumber=rpN)
+                r.save()
             else:
-                error = 'compile fail,' + cpl.stdout.decode('utf-8')
+                error = 'RUN FAIL\n' + fight.stdout.decode('utf-8')
 
             record_list=request.user.playerdata.ai1_record.all()
             record_list2=request.user.playerdata.ai2_record.all()
@@ -95,7 +85,7 @@ def index(request):
 
         return render(request, 'fight_myself.html', {'player':request.user.playerdata,
                                                      'error':error,'records':records,
-                                                     'running':request.user.playerdata.running})
+                                                     })
 
     return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
@@ -153,6 +143,10 @@ def Get_AI(request):
     os.rename(initial_path,new_path)
     request.user.playerdata.save()
     request.user.save()
+    cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    if cpl.returncode != 0:
+        request.user.playerdata.ai.delete()
+        return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
 
 @login_required
 def myself(request):
@@ -196,7 +190,7 @@ def myself(request):
     if request.method=='POST':
         if request.user.is_authenticated():
             error = Get_AI(request)
-            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records, 'running':running})
+            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
 
     if running == True:
         # search the rpyfile and print the process
