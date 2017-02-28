@@ -40,11 +40,6 @@ def getRecords(list1, list2, playerData):
     return records
 
 def index(request):
-<<<<<<< HEAD
-
-=======
-    has_submitted=False
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
     if request.user.is_authenticated():
         try:
             data=Player.objects.get(player=request.user)
