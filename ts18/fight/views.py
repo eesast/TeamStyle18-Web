@@ -1,13 +1,43 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from .models import Player, Record
 from django.conf import settings
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from itertools import chain
 from operator import attrgetter
 import os
+import subprocess
 import urllib
 
+def getRecords(list1, list2, playerData):
+    records=[]
+    record_list = sorted(chain(list1, list2), key=attrgetter('time'),reverse=False)
+    for record in record_list:
+        r={}
+        r['time']=record.time
+        r['log']=record.log
+        if record.AI1==playerData:
+            r['scorechange']=record.scorechange
+            r['competitor']=record.AI2
+            if record.scorechange>0:
+                r['result']='胜利'
+            elif record.scorechange<0:
+                r['result']='失败'
+            else:
+                r['result']='平局'
+        if record.AI2==playerData:
+            r['scorechange']=-record.scorechange
+            r['competitor']=record.AI1
+            if record.scorechange<0:
+                r['result']='胜利'
+            elif record.scorechange>0:
+                r['result']='失败'
+            else:
+                r['result']='平局'
+        records.append(r)
+    return records
 
 def index(request):
     has_submitted=False
@@ -31,9 +61,41 @@ def index(request):
                 return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
             else:
                 return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
-        if has_submitted==True:
-            pass#接入api
 
+        running = request.user.playerdata.running
+        if has_submitted == True and request.user.playerdata.running == False:
+            error = ''
+            cpl = subprocess.run('submits/compile.sh %s_%s' % (request.user.username, request.user.id),
+                                         shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            if cpl.returncode == 0: #compile completed
+                fight = subprocess.run('server/fight_server.sh %s_%s %s_%s' %
+                                              (request.user.username, request.user.id,
+                                              competitor.player.username, competitor.player.id),
+                                       shell=True,
+                                       stdout=subprocess.PIPE,
+                                       stderr=subprocess.STDOUT)
+
+                if fight.returncode == 0:  # process running
+                    request.user.playerdata.running = True
+                    rpN =  fight.stdout.decode('utf-8')
+                    request.user.playerdata.rpyNumber = rpN
+                    request.user.playerdata.save()
+                    r = Record(AI1=request.user.playerdata,
+                               AI2=competitor,
+                               rpyNumber=rpN)
+                    r.save()
+                else:
+                    error = fight.stdout.decode('utf-8')
+            else:
+                error = cpl.stdout.decode('utf-8')
+
+            record_list=request.user.playerdata.ai1_record.all()
+            record_list2=request.user.playerdata.ai2_record.all()
+            records = getRecords(record_list, record_list2, request.user.playerdata)
+
+        return render(request, 'fight_myself.html', {'player':request.user.playerdata,
+                                                     'error':error,'records':records,
+                                                     'running':request.user.playerdata.running})
 
     if request.user.is_authenticated():
         return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
@@ -62,7 +124,7 @@ def Get_AI(request):
         return '请上传cpp或c格式的文件'
     # for compatibale reason
     if old_name.startswith('/'):
-        request.user.playerdata.ai.name = os.path.join('ai_submit', os.path.split(old_name)[-1])
+        request.user.playerdata.ai.name = os.path.join('submits', os.path.split(old_name)[-1])
         request.user.playerdata.save()
     try:
         old_path = request.user.playerdata.ai.path
@@ -77,62 +139,87 @@ def Get_AI(request):
 
     # rename the new avatar to a regular name, and meanwhile, place the avatar
     # at a required place (using os.rename)
-    suffix = name.split('.')[-1]
+    pathdir = os.path.join(
+        settings.BASE_DIR, '..','..','ts18','submits', '%s_%s' % (request.user.username, request.user.id))
     request.user.playerdata.ai.name=os.path.join(
-        'ai_submit',
-        'ai_%s_%s.%s' % (request.user.username, request.user.id, suffix)
-    )
-    new_path=os.path.join(settings.MEDIA_ROOT, request.user.playerdata.ai.name)
+        'submits',
+        '%s_%s' % (request.user.username, request.user.id),'playerMain.cpp')
+
+    new_path=os.path.join(pathdir, 'playerMain.cpp')
+
+    if not os.path.exists(pathdir):
+        os.mkdir(pathdir)
+
     if os.path.exists(new_path):
         os.remove(new_path)
+
     os.rename(initial_path,new_path)
     request.user.playerdata.save()
     request.user.save()
 
+@login_required
 def myself(request):
     try:
         data=Player.objects.get(player=request.user)
     except :
         data = Player(player = request.user)
         data.save()
-    error=''
-    record_list=[]
-    records=[]
     record_list=request.user.playerdata.ai1_record.all()
     record_list2=request.user.playerdata.ai2_record.all()
-    record_list = sorted(chain(record_list,record_list2), key=attrgetter('time'),reverse=False)
+    records = getRecords(record_list, record_list2, request.user.playerdata)
+#    record_list = sorted(chain(record_list,record_list2), key=attrgetter('time'),reverse=False)
+#
+#    if not record_list==[]:
+#        for record in record_list:
+#            r={}
+#            r['time']=record.time
+#            r['log']=record.log
+#            if record.AI1==request.user.playerdata:
+#                r['scorechange']=record.scorechange
+#                r['competitor']=record.AI2
+#                if record.scorechange>0:
+#                    r['result']='胜利'
+#                elif record.scorechange<0:
+#                    r['result']='失败'
+#                else:
+#                    r['result']='平局'
+#            if record.AI2==request.user.playerdata:
+#                r['scorechange']=-record.scorechange
+#                r['competitor']=record.AI1
+#                if record.scorechange<0:
+#                    r['result']='胜利'
+#                elif record.scorechange>0:
+#                    r['result']='失败'
+#                else:
+#                    r['result']='平局'
+#            records.append(r)
 
-    if not record_list==[]:
-        for record in record_list:
-            r={}
-            r['time']=record.time
-            r['log']=record.log
-            if record.AI1==request.user.playerdata:
-                r['scorechange']=record.scorechange
-                r['competitor']=record.AI2
-                if record.scorechange>0:
-                    r['result']='胜利'
-                elif record.scorechange<0:
-                    r['result']='失败'
-                else:
-                    r['result']='平局'
-            if record.AI2==request.user.playerdata:
-                r['scorechange']=-record.scorechange
-                r['competitor']=record.AI1
-                if record.scorechange<0:
-                    r['result']='胜利'
-                elif record.scorechange>0:
-                    r['result']='失败'
-                else:
-                    r['result']='平局'
-            records.append(r)
-
+    error=''
+    running = request.user.playerdata.running
     if request.method=='POST':
         if request.user.is_authenticated():
             error = Get_AI(request)
-            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
+            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records, 'running':running})
 
-    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
+    if running == True:
+        # search the rpyfile and print the process
+        rpyPath = os.path.join(settings.BASE_DIR, '..', '..', 'fight_result', request.user.playerdata.rpyNumber+'.rpy')
+        if os.path.exists(rpyPath):
+            request.user.playerdata.update(running=False)
+            r = Record.objects.get(rpyNumber=request.user.playerdata.rpyNumber)
+            r.log.path = rpyPath
+            r.log.name = request.user.playerdata.rpyNumber+'.rpy'
+            with open(os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.txt'),'r') as f:
+                lines = f.readlines()
+                last = lines[-1]
+                if '0' in last:
+                    r.scorechange = 1 # AI1 wins
+                elif '1' in last:
+                    r.scorechange = -1 # AI2 wins
+            r.save()
+            return HttpResponseRedirect(reverse('fight:myself'))
+
+    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records })
 
 def aidownload(request):
     try:
