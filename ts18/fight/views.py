@@ -54,6 +54,7 @@ def index(request):
 
     if request.method=='POST':
         compete_id=request.POST.get('compete_id','')
+        print(request.POST)
         try:
             competitor=Player.objects.get(id=compete_id)
         except Player.DoesNotExsit:

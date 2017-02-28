@@ -179,7 +179,7 @@ ADMINS = (
     ('Yufeng Huang', 'mildwindyu@hotmail.com'),
 	('Zhao Wang', 'thuzhaowang@163.com'),
     ('Zefang Zong', 'zongzefang@hotmail.com'),
-
+)
 MEDIA_URL = '/media/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
