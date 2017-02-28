@@ -40,27 +40,28 @@ def getRecords(list1, list2, playerData):
     return records
 
 def index(request):
-    has_submitted=False
+
     if request.user.is_authenticated():
         try:
             data=Player.objects.get(player=request.user)
         except :
             data = Player(player = request.user)
             data.save()
-        if request.user.playerdata.ai!=None:
-            has_submitted=True
+      
+        if request.user.playerdata.running == True:
+            return HttpResponseRedirect(reverse('fight:myself')
 
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
-        compete_id=request.POST.get('id','')
-        print(request.POST)
+        compete_id=request.POST['id']
         try:
             competitor=Player.objects.get(id=compete_id)
         except Player.DoesNotExsit:
             return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
-        if has_submitted == True and request.user.playerdata.running == False:
+        if request.user.playerdata.running == False:
+            error = 'in process'
             fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
                                           (request.user.username, request.user.id,
                                           competitor.player.username, competitor.player.id),
@@ -83,11 +84,11 @@ def index(request):
             record_list2=request.user.playerdata.ai2_record.all()
             records = getRecords(record_list, record_list2, request.user.playerdata)
 
-        return render(request, 'fight_myself.html', {'player':request.user.playerdata,
-                                                     'error':error,'records':records,
-                                                     })
+     #   return render(request, 'fight_myself.html', {'player':request.user.playerdata,
+     #                                                'error':error,'records':records,
+     #                                                })
 
-    return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
+    return render(request,'fight.html',{'player_list':players_list})
 
 
 
@@ -205,8 +206,12 @@ def myself(request):
                 last = lines[-1]
                 if '0' in last:
                     r.scorechange = 1 # AI1 wins
+                    r.AI1.score += 1
+                    r.AI2.score -= 1
                 elif '1' in last:
                     r.scorechange = -1 # AI2 wins
+                    r.AI1.score -= 1
+                    r.AI2.score += 1
             r.save()
             return HttpResponseRedirect(reverse('fight:myself'))
 
