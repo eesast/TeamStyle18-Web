@@ -191,7 +191,7 @@
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;">
                                                             {% csrf_token %}
 														    <input type="hidden" name="id" value="{{player.id}}">  
-											                <button class="btn btn-md btn-info" onclick="form.submit();document.getElementById('wait').style.display='block';" title="发起挑战">发起挑战</button>
+											                <a onclick="form.submit();" href="{% url 'fight:myself' %}">发起挑战</a>
 											           </form>
 													   
 													  {% elif not request.user.is_authenticated %}

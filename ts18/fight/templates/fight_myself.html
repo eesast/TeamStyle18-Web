@@ -139,6 +139,7 @@
 						</form>
 					</div>
 					<div class="col-md-12" style="margin-top:40px;">
+					{% if not request.user.playerdata.running %}
 						<h3>我的对战记录</h3>
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -162,6 +163,9 @@
 								{% endfor %}
 							</tbody>
 						</table>
+					{% else %}
+					<h4>正在对战中，对战结束会自动刷新页面，请稍候...</h4>
+					{% endif %}
 					</div>
 					
 																								<div id='showerror'>
