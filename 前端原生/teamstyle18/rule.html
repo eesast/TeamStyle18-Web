@@ -98,561 +98,316 @@
 				<div class="row">
 					<div class="col-md-12" style="word-wrap: break-word">
 						
-      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
-      <tbody>
-	  <tr>
-        <td class="blob-num js-line-number" id="L1" data-line-number="1"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC1" style="font-weight:bold; padding-top:15px;">﻿# 基本设定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L2" data-line-number="2"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC2">每张地图中存在两个中心对称出生地点，每个出生点都有一个主基地（宿舍），地图中有资源获取建筑（教学楼与银行），占领后可分别提高资源科技与金钱自动增长速度。主基地可以招募小鲜肉，小鲜肉可以发动技能“占领”来占领中立建筑物（系馆）。通过科技与金钱两种资源，不同的中立建筑物可以生产不同的特性的作战单位，合理搭配作战单位攻占地方的主基地，游戏设计一个上限回合数。【注意】对双方来说所有信息透明，双方人口上限目前均暂定为100。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L3" data-line-number="3"></td>
-        <td style="font-weight:bold; padding-top:15px;"># 地图设定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L4" data-line-number="4"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC4">（1）总体设定：地图为100*100正方形地图，陆空两层。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L5" data-line-number="5"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC5">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L6" data-line-number="6"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC6">（2）主基地设定：出生点在地图外围随机对称生成，在出生点的坐标上为主基地，主基地不可被占领，只可被摧毁，主基地暂定只能招募小鲜肉，主基地本身具有一定的攻击力和防御力。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L7" data-line-number="7"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC7">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L8" data-line-number="8"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC8">（3）资源建筑设定：游戏开始时主基地旁有两种属于你的资源获取建筑各一座，地图上其他地点也可以有随机对称生成的其他资源建筑。资源获取建筑物是无敌的，只能被占领。每个资源获取建筑物被占领后都有固定的，自动的资源获取速度</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L9" data-line-number="9"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC9">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L10" data-line-number="10"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC10" style="font-weight:bold; padding-top:15px;"># 结算顺序</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L11" data-line-number="11"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC11">
-		
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L12" data-line-number="12"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC12">（1）技能指令结算（除小鲜肉占领技能）</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L13" data-line-number="13"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC13">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L14" data-line-number="14"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC14">（2）单位死亡判定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L15" data-line-number="15"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC15">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L16" data-line-number="16"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC16">（3) 判断主基地是否被摧毁，若被摧毁则进行相关胜负判定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L17" data-line-number="17"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC17">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L18" data-line-number="18"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC18">（4）移动指令结算</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L19" data-line-number="19"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC19">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L20" data-line-number="20"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC20">（5）兵种获取指令结算</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L21" data-line-number="21"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC21">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L22" data-line-number="22"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC22">（6）小鲜肉占领建筑</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L23" data-line-number="23"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC23">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L24" data-line-number="24"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC24">（7）回合达到上限时进行相关胜负判定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L25" data-line-number="25"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC25">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L26" data-line-number="26"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC26" style="font-weight:bold; padding-top:15px;"># 关于指令</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L27" data-line-number="27"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC27">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L28" data-line-number="28"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC28">每个单位每回合至多只能发移动指令一条、技能指令一条（即最多可发两条指令），每个建筑每回合至多只能发送一条生产指令。若出现了同一单位指令过多，则按最后一条算。不合法指令将直接失效（若同一单位指令过多且最后一条不合法，则认为此单位这回合没进行任何操作）。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L29" data-line-number="29"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC29">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L30" data-line-number="30"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC30" style="font-weight:bold; padding-top:15px;"># 关于碰撞</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L31" data-line-number="31"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC31">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L32" data-line-number="32"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC32">不考虑碰撞问题，在逻辑层面，一个格子可以存在无数个兵，建筑不可进入但可以穿越（所有移动本质上为瞬移），但终点在建筑物内的移动指令将失效。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L33" data-line-number="33"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC33">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L34" data-line-number="34"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC34"  style="font-weight:bold; padding-top:15px;"># 建筑</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L35" data-line-number="35"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC35">（0）建筑占据1x1地图区域，地图生成时任意两个建筑不会处于共边相邻格</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L36" data-line-number="36"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC36">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L37" data-line-number="37"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC37">（1）生产型建筑：可生产对应兵种，具有一个被动技能</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L38" data-line-number="38"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC38">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L39" data-line-number="39"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC39">（2）技能型建筑：具有两个被动技能</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L40" data-line-number="40"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC40">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L41" data-line-number="41"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC41">（3）资源型建筑：游戏开始时主基地旁有两种属于你的资源获取建筑各一座，地图上其他地点也可以有随机对称生成的其他资源建筑。资源获取建筑物是无敌的，只能被占领。每个资源获取建筑物被占领后可增加一定的资源获取速度</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L42" data-line-number="42"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC42">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L43" data-line-number="43"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC43">（4）建筑除基地外均不可摧毁，但可被多次占领</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L44" data-line-number="44"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC44">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L45" data-line-number="45"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC45">（5）建筑物的占领：小鲜肉在建筑共边临格内发动技能瞬时间占领建筑，两个小鲜肉同时发动则两个小鲜肉同时消失，发动技能后的小鲜肉消失。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L46" data-line-number="46"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC46">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L47" data-line-number="47"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC47"  style="font-weight:bold; padding-top:15px;"># 单位基本设定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L48" data-line-number="48"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC48">（1）单位分为步兵、坦克、飞机三种大类</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L49" data-line-number="49"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC49">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L50" data-line-number="50"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC50">（2）每个大类又分为多种单位，具体种类参见下方表格。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L51" data-line-number="51"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC51">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L52" data-line-number="52"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC52">（3）不同单位从不同生产型建筑物获取，单位的获取是在获取指令生效后的下一回合即可获得，但每回合只有最后一条单位获取指令能生效。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L53" data-line-number="53"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC53">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L54" data-line-number="54"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC54">（4）每个单位都具有如下属性：建造所需资源、生产建筑、攻击力、攻击距离、防御力、移动速度、技能、消耗人口数、最多建造数量。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L55" data-line-number="55"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC55">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L56" data-line-number="56"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC56">（5）每个单位可以进行移动操作（指定单位和它每个回合到达的位置构成的向量）和使用技能操作（指定单位，技能种类和施放目标（id和/或位置））</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L57" data-line-number="57"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC57">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L58" data-line-number="58"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC58">（6）每方总人口数有限制，各兵种的人口数也有限制（比如黑客数量不能超过两个）</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L59" data-line-number="59"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC59">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L60" data-line-number="60"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC60">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L61" data-line-number="61"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC61"  style="font-weight:bold; padding-top:15px;"># 胜利条件</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L62" data-line-number="62"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC62">1.	一方摧毁敌方的主基地即获得胜利。（若双方主基地同时被摧毁，则认为回合数达到上限，并按下面的顺序进行胜负判断）</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L63" data-line-number="63"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC63">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L64" data-line-number="64"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC64">2.	若在规定回合数内，没有一方主基地告破，则按一下顺序判胜负：</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L65" data-line-number="65"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC65">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L66" data-line-number="66"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC66">（1）基地剩余血量多的一方获胜</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L67" data-line-number="67"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC67">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L68" data-line-number="68"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC68">（2）剩余兵力数量多的一方获胜</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L69" data-line-number="69"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC69">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L70" data-line-number="70"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC70">（3）资源总量（两种资源量相加）多的获胜</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L71" data-line-number="71"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC71">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L72" data-line-number="72"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC72">（4）占领建筑数多的获胜</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L73" data-line-number="73"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC73">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L74" data-line-number="74"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC74">（5）若以上两个条件仍无法判断胜负，则平局。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L75" data-line-number="75"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC75">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L76" data-line-number="76"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC76"  style="font-weight:bold; padding-top:15px;"># 伤害计算</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L77" data-line-number="77"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC77">伤害值=兵种技能攻击值\*（1+攻击加成）\*(1-目标防御值\*（1+防御加成）/1000)</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L78" data-line-number="78"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC78">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L79" data-line-number="79"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC79"  style="font-weight:bold; padding-top:15px;"># 主基地</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L80" data-line-number="80"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC80">主基地血量为10000，初始防御值为0。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L81" data-line-number="81"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC81">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L82" data-line-number="82"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC82" style="font-weight:bold; padding-top:15px;"># 建筑及兵种详细设定</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L83" data-line-number="83"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC83">|     生产型建筑     |      单位      |     院系技能       |</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L84" data-line-number="84"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC84">|-------------|---------------|--------------------|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L85" data-line-number="85"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC85">|主基地|小鲜肉|普通攻击炮塔：每回合对单个敌对目标造成10点伤害|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L86" data-line-number="86"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC86">|电子对抗学院|电子对抗坦克|高级电子科技：电子对抗学院拥有先进的电子科技。提升坦克和飞机的攻击力10%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L87" data-line-number="87"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC87">|黑客学院|黑客|天网：信息安全学院拥有丰富的黑客攻防经验。可提高单位防入侵能力，被入侵所需点数增加50%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L88" data-line-number="88"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC88">|无人机系|无人战机|自动化生产：高度自动化的控制，耗费资源减少15%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L89" data-line-number="89"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC89">|辐射系|核子坦克|辐射弹头：通过增加辐射弹头，提升坦克攻击力20%。|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L90" data-line-number="90"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC90">|特种车辆系|主战坦克|车辆系对车辆制造有着丰富的技术，可提高坦克攻击5%、防御10%和速度1点|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L91" data-line-number="91"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC91">|高等飞行器研究院|鹰式攻击机|天空领主：高等飞行器研究院的航空科技首屈一指，减少飞机花费10%，增加飞机速度3点，攻击力10%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L92" data-line-number="92"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC92">|生化研究院|改造人战士|基因工程：通过对人体基因的改造，提升步兵的生命值50%，攻击10%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L93" data-line-number="93"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC93">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L94" data-line-number="94"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC94">|     技能型建筑    |     院系技能1       |      院系技能2       |</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L95" data-line-number="95"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC95">|-------------|--------------------|---------------------|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L96" data-line-number="96"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC96">|建造学院|高等建造学：对建筑的特殊能量护盾，提供100点的基地护盾|建筑防御学：提升基地炮塔攻击10点|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L97" data-line-number="97"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC97">|社科金融研究院|经济原理：通过经济运作，可降低坦克飞机的获取消耗10%|人文关怀：通过人文精神的灌输，可提升步兵的防御20%|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L98" data-line-number="98"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC98">|特殊材料研究院|复合装甲：通过复合材料的使用，提升坦克和飞机防御力10%|纳米材料学：超轻材料的应用，提升飞机速度5点|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L99" data-line-number="99"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC99">|纳米科技研究院|纳米治疗机器人：通过纳米机器人的使用，对步兵产生每回合4%的治疗效果|纳米维修机器人：通过纳米机器人的使用，对坦克飞机提供每回合3%的维修效果|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L100" data-line-number="100"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC100">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L101" data-line-number="101"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC101">注：$代表金钱   @代表科技   #代表人口占用  CD:代表冷却时间</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L102" data-line-number="102"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC102">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L103" data-line-number="103"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC103">|兵种单位|类型|可攻击目标|普攻|技能|HP|攻击(单发)/DPS|速度|防御|射程|价格&amp;人口|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L104" data-line-number="104"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC104">|------------|-----------|----------|--------|----------|----------|-------|----|---------|------|------|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L105" data-line-number="105"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC105">|小鲜肉|步兵|无|无|无|100|0/0|3|10|0|$100@0#1|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L106" data-line-number="106"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC106">|电子对抗坦克|坦克|坦克飞机|(CD:10)电磁脉冲：发出高频电磁脉冲，损伤敌方单位电子元件。在瘫痪一辆敌方车辆5回合或对敌方飞机造成一定伤害，对步兵无效|无|500|200点(对飞机)/20|6|100|12|$1000@400#3|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L107" data-line-number="107"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC107">|黑客|步兵|坦克飞机|(CD:1)网络入侵：通过程序漏洞入侵敌方单位控制系统。入侵敌方坦克或飞机，每回合增加15点入侵点数，在达到该单位血量上限后击毁该单位，可对己方单位使用来消减被入侵点数|无|150|null|3|20|18|$600@300#2|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L108" data-line-number="108"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC108">|无人战机|飞机|坦克飞机步兵|(CD:1)机炮：对目标造成伤害5点|无|300|5/5|12|50|10|$200@400#2|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L109" data-line-number="109"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC109">|核子坦克|精英坦克|坦克步兵(技能可对飞机)|(CD:10)贫铀穿甲弹：对目标造成伤害300点|(CD:75)战术核武：将先进的核武小型化技术集成其中。发射一枚小型核武，对3*3格内的任何单位造成伤害800点|800|300/30|5|100|20|$4000@2500#10|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L110" data-line-number="110"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC110">|主战坦克|坦克|坦克步兵飞机|(CD:10)轨道炮：对目标造成伤害100点|无|600|100/10|7|400|14|$1500@600#4|20|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L111" data-line-number="111"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC111">|鹰式攻击机|精英飞机|坦克步兵飞机|(CD:20)飞弹：对1格内所有目标造成伤害200点|(CD:50)超音速打击：发射两枚重型导弹打击2个选定格子内的所有目标，造成400点伤害，并减轻重量，在10回合内提升速度5点|600|200/10(AOE)|15|200|16|$1500@3000#8|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L112" data-line-number="112"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC112">|改造人战士|精英步兵|坦克步兵，飞行时可对飞机|(CD:1)镭射步枪：对目标造成伤害15点|(CD:50)战术背包：特种多功能背包，在20回合内可以较高速飞行(速度12)，并且可对自己进行每回合2%的治疗|500|15/15|4|150|10|$2000@1500#6|</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L113" data-line-number="113"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC113">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L114" data-line-number="114"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC114"  style="font-weight:bold; padding-top:15px;">#资源获取与结算</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L115" data-line-number="115"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC115">（1） 双方初始拥有科技值3000，金钱5000，人口上限100</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L116" data-line-number="116"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC116">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L117" data-line-number="117"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC117">（2） 每回合后结算本方占有教学楼数目和银行数目。教学楼数目×20为本回合本方科技值增加量，银行数目×30为本回合内金钱增加量</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L118" data-line-number="118"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC118">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L119" data-line-number="119"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC119"  style="font-weight:bold; padding-top:15px;">#单位兵种生成与死亡</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L120" data-line-number="120"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC120">（1） 当资源符合生产需求并且没有达到人口上限时，可以正常生产，否则指令作废。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L121" data-line-number="121"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC121">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L122" data-line-number="122"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC122">（2） 鹰式战机、改造人战士、核子坦克每方单位回合内最多只能拥有一个。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L123" data-line-number="123"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC123">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L124" data-line-number="124"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC124">（3） 当一个单位兵种本回合内生命值为非正数时或者被黑客攻击值大于本单位所能接受的最大黑客值时，该兵种在本回合内毁灭。</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L125" data-line-number="125"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC125">
-</td>
-      </tr>
-      <tr>
-        <td class="blob-num js-line-number" id="L126" data-line-number="126"></td>
-        <td class="blob-code blob-code-inner js-file-line" id="LC126">（4） 单位兵种死亡后，该回合内会恢复该兵种所占人口容量。</td>
-      </tr>
-</tbody>
-</table>
+      <div class="readme blob instapaper_body" id="readme">
+    <article class="markdown-body entry-content" itemprop="text"><h1><a class="anchor" id="user-content-基本设定" aria-hidden="true" href="#基本设定"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>基本设定</h1>
+
+<p>每张地图中存在两个中心对称出生地点，每个出生点都有一个主基地（宿舍），地图中有资源获取建筑（教学楼与银行），占领后可分别提高资源科技与金钱自动增长速度。主基地可以招募小鲜肉，小鲜肉可以发动技能“占领”来占领中立建筑物（系馆）。通过科技与金钱两种资源，不同的中立建筑物可以生产不同的特性的作战单位，合理搭配作战单位攻占地方的主基地，游戏设计一个上限回合数。【注意】对双方来说所有信息透明，双方人口上限目前均暂定为100。</p>
+
+<h1><a class="anchor" id="user-content-地图设定" aria-hidden="true" href="#地图设定"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>地图设定</h1>
+
+<p>（1）总体设定：地图为100*100正方形地图，陆空两层。</p>
+
+<p>（2）主基地设定：出生点在地图外围随机对称生成，在出生点的坐标上为主基地，主基地不可被占领，只可被摧毁，主基地暂定只能招募小鲜肉，主基地本身具有一定的攻击力和防御力。</p>
+
+<p>（3）资源建筑设定：游戏开始时主基地旁有两种属于你的资源获取建筑各一座，地图上其他地点也可以有随机对称生成的其他资源建筑。资源获取建筑物是无敌的，只能被占领。每个资源获取建筑物被占领后都有固定的，自动的资源获取速度</p>
+
+<h1><a class="anchor" id="user-content-结算顺序" aria-hidden="true" href="#结算顺序"><svg class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>结算顺序</h1>
+
+<p>（1）技能指令结算（除小鲜肉占领技能）</p>
+
+<p>（2）单位死亡判定</p>
+
+<p>（3) 判断主基地是否被摧毁，若被摧毁则进行相关胜负判定</p>
+
+<p>（4）移动指令结算</p>
+
+<p>（5）兵种获取指令结算</p>
+
+<p>（6）小鲜肉占领建筑</p>
+
+<p>（7）回合达到上限时进行相关胜负判定</p>
+
+<h1><a class="anchor" id="user-content-关于指令" aria-hidden="true" href="#关于指令"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>关于指令</h1>
+
+<p>每个单位每回合至多只能发移动指令一条、技能指令一条（即最多可发两条指令），每个建筑每回合至多只能发送一条生产指令。若出现了同一单位指令过多，则按最后一条算。不合法指令将直接失效（若同一单位指令过多且最后一条不合法，则认为此单位这回合没进行任何操作）。</p>
+
+<h1><a class="anchor" id="user-content-关于碰撞" aria-hidden="true" href="#关于碰撞"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>关于碰撞</h1>
+
+<p>不考虑碰撞问题，在逻辑层面，一个格子可以存在无数个兵，建筑不可进入但可以穿越（所有移动本质上为瞬移），但终点在建筑物内的移动指令将失效。</p>
+
+<h1><a class="anchor" id="user-content-建筑" aria-hidden="true" href="#建筑"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>建筑</h1>
+
+<p>（0）建筑占据1x1地图区域，地图生成时任意两个建筑不会处于共边相邻格</p>
+
+<p>（1）生产型建筑：可生产对应兵种，具有一个被动技能</p>
+
+<p>（2）技能型建筑：具有两个被动技能</p>
+
+<p>（3）资源型建筑：游戏开始时主基地旁有两种属于你的资源获取建筑各一座，地图上其他地点也可以有随机对称生成的其他资源建筑。资源获取建筑物是无敌的，只能被占领。每个资源获取建筑物被占领后可增加一定的资源获取速度</p>
+
+<p>（4）建筑除基地外均不可摧毁，但可被多次占领</p>
+
+<p>（5）建筑物的占领：小鲜肉在建筑共边临格内发动技能瞬时间占领建筑，两个小鲜肉同时发动则两个小鲜肉同时消失，发动技能后的小鲜肉消失。</p>
+
+<h1><a class="anchor" id="user-content-单位基本设定" aria-hidden="true" href="#单位基本设定"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>单位基本设定</h1>
+
+<p>（1）单位分为步兵、坦克、飞机三种大类</p>
+
+<p>（2）每个大类又分为多种单位，具体种类参见下方表格。</p>
+
+<p>（3）不同单位从不同生产型建筑物获取，单位的获取是在获取指令生效后的下一回合即可获得，但每回合只有最后一条单位获取指令能生效。</p>
+
+<p>（4）每个单位都具有如下属性：建造所需资源、生产建筑、攻击力、攻击距离、防御力、移动速度、技能、消耗人口数、最多建造数量。</p>
+
+<p>（5）每个单位可以进行移动操作（指定单位和它每个回合到达的位置构成的向量）和使用技能操作（指定单位，技能种类和施放目标（id和/或位置））</p>
+
+<p>（6）每方总人口数有限制，各兵种的人口数也有限制（比如黑客数量不能超过两个）</p>
+
+<h1><a class="anchor" id="user-content-胜利条件" aria-hidden="true" href="#胜利条件"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>胜利条件</h1>
+
+<ol>
+<li><p>一方摧毁敌方的主基地即获得胜利。（若双方主基地同时被摧毁，则认为回合数达到上限，并按下面的顺序进行胜负判断）</p></li>
+<li><p>若在规定回合数内，没有一方主基地告破，则按一下顺序判胜负：</p></li>
+</ol>
+
+<p>（1）基地剩余血量多的一方获胜</p>
+
+<p>（2）剩余兵力数量多的一方获胜</p>
+
+<p>（3）资源总量（两种资源量相加）多的获胜</p>
+
+<p>（4）占领建筑数多的获胜</p>
+
+<p>（5）若以上两个条件仍无法判断胜负，则平局。</p>
+
+<h1><a class="anchor" id="user-content-伤害计算" aria-hidden="true" href="#伤害计算"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>伤害计算</h1>
+
+<p>伤害值=兵种技能攻击值*（1+攻击加成）*(1-目标防御值*（1+防御加成）/1000)</p>
+
+<h1><a class="anchor" id="user-content-主基地" aria-hidden="true" href="#主基地"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>主基地</h1>
+
+<p>主基地血量为10000，初始防御值为0。</p>
+
+<h1><a class="anchor" id="user-content-建筑及兵种详细设定" aria-hidden="true" href="#建筑及兵种详细设定"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>建筑及兵种详细设定</h1>
+
+<table class="table table-bordered table-striped"><thead>
+<tr>
+<th>生产型建筑</th>
+<th>单位</th>
+<th>院系技能</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>主基地</td>
+<td>小鲜肉</td>
+<td>普通攻击炮塔：每回合对单个敌对目标造成10点伤害</td>
+</tr>
+<tr>
+<td>电子对抗学院</td>
+<td>电子对抗坦克</td>
+<td>高级电子科技：电子对抗学院拥有先进的电子科技。提升坦克和飞机的攻击力10%</td>
+</tr>
+<tr>
+<td>黑客学院</td>
+<td>黑客</td>
+<td>天网：信息安全学院拥有丰富的黑客攻防经验。可提高单位防入侵能力，被入侵所需点数增加50%</td>
+</tr>
+<tr>
+<td>无人机系</td>
+<td>无人战机</td>
+<td>自动化生产：高度自动化的控制，耗费资源减少15%</td>
+</tr>
+<tr>
+<td>辐射系</td>
+<td>核子坦克</td>
+<td>辐射弹头：通过增加辐射弹头，提升坦克攻击力20%。</td>
+</tr>
+<tr>
+<td>特种车辆系</td>
+<td>主战坦克</td>
+<td>车辆系对车辆制造有着丰富的技术，可提高坦克攻击5%、防御10%和速度1点</td>
+</tr>
+<tr>
+<td>高等飞行器研究院</td>
+<td>鹰式攻击机</td>
+<td>天空领主：高等飞行器研究院的航空科技首屈一指，减少飞机花费10%，增加飞机速度3点，攻击力10%</td>
+</tr>
+<tr>
+<td>生化研究院</td>
+<td>改造人战士</td>
+<td>基因工程：通过对人体基因的改造，提升步兵的生命值50%，攻击10%</td>
+</tr>
+</tbody></table>
+
+<table class="table table-bordered table-striped"><thead>
+<tr>
+<th>技能型建筑</th>
+<th>院系技能1</th>
+<th>院系技能2</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>建造学院</td>
+<td>高等建造学：对建筑的特殊能量护盾，提供100点的基地护盾</td>
+<td>建筑防御学：提升基地炮塔攻击10点</td>
+</tr>
+<tr>
+<td>社科金融研究院</td>
+<td>经济原理：通过经济运作，可降低坦克飞机的获取消耗10%</td>
+<td>人文关怀：通过人文精神的灌输，可提升步兵的防御20%</td>
+</tr>
+<tr>
+<td>特殊材料研究院</td>
+<td>复合装甲：通过复合材料的使用，提升坦克和飞机防御力10%</td>
+<td>纳米材料学：超轻材料的应用，提升飞机速度5点</td>
+</tr>
+<tr>
+<td>纳米科技研究院</td>
+<td>纳米治疗机器人：通过纳米机器人的使用，对步兵产生每回合4%的治疗效果</td>
+<td>纳米维修机器人：通过纳米机器人的使用，对坦克飞机提供每回合3%的维修效果</td>
+</tr>
+</tbody></table>
+
+<p>注：$代表金钱   @代表科技   #代表人口占用  CD:代表冷却时间</p>
+
+<table class="table table-bordered table-striped"><thead>
+<tr>
+<th>兵种单位</th>
+<th>类型</th>
+<th>可攻击目标</th>
+<th>普攻</th>
+<th>技能</th>
+<th>HP</th>
+<th>攻击(单发)/DPS</th>
+<th>速度</th>
+<th>防御</th>
+<th>射程</th>
+<th>价格&amp;人口</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>小鲜肉</td>
+<td>步兵</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>100</td>
+<td>0/0</td>
+<td>3</td>
+<td>10</td>
+<td>0</td>
+<td>$100@0#1</td>
+</tr>
+<tr>
+<td>电子对抗坦克</td>
+<td>坦克</td>
+<td>坦克飞机</td>
+<td>(CD:10)电磁脉冲：发出高频电磁脉冲，损伤敌方单位电子元件。在瘫痪一辆敌方车辆5回合或对敌方飞机造成一定伤害，对步兵无效</td>
+<td>无</td>
+<td>500</td>
+<td>200点(对飞机)/20</td>
+<td>6</td>
+<td>100</td>
+<td>12</td>
+<td>$1000@400#3</td>
+</tr>
+<tr>
+<td>黑客</td>
+<td>步兵</td>
+<td>坦克飞机</td>
+<td>(CD:1)网络入侵：通过程序漏洞入侵敌方单位控制系统。入侵敌方坦克或飞机，每回合增加15点入侵点数，在达到该单位血量上限后击毁该单位，可对己方单位使用来消减被入侵点数</td>
+<td>无</td>
+<td>150</td>
+<td>null</td>
+<td>3</td>
+<td>20</td>
+<td>18</td>
+<td>$600@300#2</td>
+</tr>
+<tr>
+<td>无人战机</td>
+<td>飞机</td>
+<td>坦克飞机步兵</td>
+<td>(CD:1)机炮：对目标造成伤害5点</td>
+<td>无</td>
+<td>300</td>
+<td>5/5</td>
+<td>12</td>
+<td>50</td>
+<td>10</td>
+<td>$200@400#2</td>
+</tr>
+<tr>
+<td>核子坦克</td>
+<td>精英坦克</td>
+<td>坦克步兵(技能可对飞机)</td>
+<td>(CD:10)贫铀穿甲弹：对目标造成伤害300点</td>
+<td>(CD:75)战术核武：将先进的核武小型化技术集成其中。发射一枚小型核武，对3*3格内的任何单位造成伤害800点</td>
+<td>800</td>
+<td>300/30</td>
+<td>5</td>
+<td>100</td>
+<td>20</td>
+<td>$4000@2500#10</td>
+</tr>
+<tr>
+<td>主战坦克</td>
+<td>坦克</td>
+<td>坦克步兵飞机</td>
+<td>(CD:10)轨道炮：对目标造成伤害100点</td>
+<td>无</td>
+<td>600</td>
+<td>100/10</td>
+<td>7</td>
+<td>400</td>
+<td>14</td>
+<td>$1500@600#4</td>
+</tr>
+<tr>
+<td>鹰式攻击机</td>
+<td>精英飞机</td>
+<td>坦克步兵飞机</td>
+<td>(CD:20)飞弹：对1格内所有目标造成伤害200点</td>
+<td>(CD:50)超音速打击：发射两枚重型导弹打击2个选定格子内的所有目标，造成400点伤害，并减轻重量，在10回合内提升速度5点</td>
+<td>600</td>
+<td>200/10(AOE)</td>
+<td>15</td>
+<td>200</td>
+<td>16</td>
+<td>$1500@3000#8</td>
+</tr>
+<tr>
+<td>改造人战士</td>
+<td>精英步兵</td>
+<td>坦克步兵，飞行时可对飞机</td>
+<td>(CD:1)镭射步枪：对目标造成伤害15点</td>
+<td>(CD:50)战术背包：特种多功能背包，在20回合内可以较高速飞行(速度12)，并且可对自己进行每回合2%的治疗</td>
+<td>500</td>
+<td>15/15</td>
+<td>4</td>
+<td>150</td>
+<td>10</td>
+<td>$2000@1500#6</td>
+</tr>
+</tbody></table>
+
+<h1><a class="anchor" id="user-content-资源获取与结算" aria-hidden="true" href="#资源获取与结算"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>资源获取与结算</h1>
+
+<p>（1） 双方初始拥有科技值3000，金钱5000，人口上限100</p>
+
+<p>（2） 每回合后结算本方占有教学楼数目和银行数目。教学楼数目×20为本回合本方科技值增加量，银行数目×30为本回合内金钱增加量</p>
+
+<h1><a class="anchor" id="user-content-单位兵种生成与死亡" aria-hidden="true" href="#单位兵种生成与死亡"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-link" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" version="1.1"><path fill-rule="evenodd" d="M 4 9 h 1 v 1 H 4 c -1.5 0 -3 -1.69 -3 -3.5 S 2.55 3 4 3 h 4 c 1.45 0 3 1.69 3 3.5 c 0 1.41 -0.91 2.72 -2 3.25 V 8.59 c 0.58 -0.45 1 -1.27 1 -2.09 C 10 5.22 8.98 4 8 4 H 4 c -0.98 0 -2 1.22 -2 2.5 S 3 9 4 9 Z m 9 -3 h -1 v 1 h 1 c 1 0 2 1.22 2 2.5 S 13.98 12 13 12 H 9 c -0.98 0 -2 -1.22 -2 -2.5 c 0 -0.83 0.42 -1.64 1 -2.09 V 6.25 c -1.09 0.53 -2 1.84 -2 3.25 C 6 11.31 7.55 13 9 13 h 4 c 1.45 0 3 -1.69 3 -3.5 S 14.5 6 13 6 Z" /></svg></a>单位兵种生成与死亡</h1>
+
+<p>（1） 当资源符合生产需求并且没有达到人口上限时，可以正常生产，否则指令作废。</p>
+
+<p>（2） 鹰式战机、改造人战士、核子坦克每方单位回合内最多只能拥有一个。</p>
+
+<p>（3） 当一个单位兵种本回合内生命值为非正数时或者被黑客攻击值大于本单位所能接受的最大黑客值时，该兵种在本回合内毁灭。</p>
+
+<p>（4） 单位兵种死亡后，该回合内会恢复该兵种所占人口容量。</p>
+</article>
+  </div>
 
 
 					</div>
