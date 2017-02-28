@@ -162,7 +162,14 @@
 							</tbody>
 						</table>
 					{% else %}
-					<h4>正在对战中，对战结束会自动刷新页面，请稍候...</h4>
+					<h4>正在对战中，系统会自动刷新页面直至对战结束，请稍候...</h4>
+					<script language="Javascript">
+						function myrefresh()
+						{
+							window.location.reload(true);
+						}
+						setTimeout('myrefresh()',5000);
+					</script>
 					{% endif %}
 					</div>
 					
