@@ -10,6 +10,7 @@ import urllib
 
 def noticeIndex(request):
     notice_list = Notification.objects.all()
+    notice_list = Notification.objects.order_by('-time_attached')
     return render(request, 'file.html', {'notice_list' : notice_list})
 
 def download(request):
