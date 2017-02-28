@@ -63,7 +63,7 @@
 						<li class="ts-cta-btn"><a href="https://www.eesast.com/account/simplesignup">Sign up</a></li>
 					{% endif %}
 					{% if request.user.is_authenticated %}
-						<li><a href="{% url 'login:login' %}">Welcome</a></li>
+						<li><a href="{% url 'login:login' %}">Welcome!{{request.user.username}}</a></li>
 					{% endif %}
 					</ul>
 				</nav>

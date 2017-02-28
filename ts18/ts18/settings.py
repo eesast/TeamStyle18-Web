@@ -30,6 +30,7 @@ else:
     DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '.eesast.com',
 ]
 
@@ -71,7 +72,7 @@ REST_FRAMEWORK = {
      )
  }
 
- 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -172,10 +173,14 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ADMINS = (
+    ('Yufeng Huang', 'mildwindyu@hotmail.com'),
+	('Zhao Wang', 'thuzhaowang@163.com'),
+    ('Zefang Zong', 'zongzefang@hotmail.com'),
 
 MEDIA_URL = '/media/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
