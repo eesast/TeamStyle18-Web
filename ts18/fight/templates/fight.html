@@ -194,7 +194,7 @@
 											                <button class="btn btn-md btn-info" onclick="form.submit();document.getElementById('wait').style.display='block';" title="发起挑战">发起挑战</button>
 											           </form>
 													   
-													  {% elseif not request.user.is_authenticated %}
+													  {% elif not request.user.is_authenticated %}
 													  尚未登录
 													  {% else %}
 													  尚未上传ai

@@ -63,15 +63,17 @@ def index(request):
         running = request.user.playerdata.running
         if has_submitted == True and request.user.playerdata.running == False:
             error = ''
-            cpl = subprocess.run('/var/www/ts18/server/compile.sh %s_%s' % (request.user.username, request.user.id),
-                                         shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            print(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id))
+            cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id),
+                                         shell=True, stdout=subprocess.PIPE)
+
             if cpl.returncode == 0: #compile completed
-                fight = subprocess.run('/var/www/ts18/server/fight_server.sh %s_%s %s_%s' %
+                fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
                                               (request.user.username, request.user.id,
                                               competitor.player.username, competitor.player.id),
                                        shell=True,
                                        stdout=subprocess.PIPE,
-                                       stderr=subprocess.STDOUT)
+                                       )
 
                 if fight.returncode == 0:  # process running
                     request.user.playerdata.running = True
@@ -83,9 +85,9 @@ def index(request):
                                rpyNumber=rpN)
                     r.save()
                 else:
-                    error = fight.stdout.decode('utf-8')
+                    error = 'run fail,' + fight.stdout.decode('utf-8')
             else:
-                error = cpl.stdout.decode('utf-8')
+                error = 'compile fail,' + cpl.stdout.decode('utf-8')
 
             record_list=request.user.playerdata.ai1_record.all()
             record_list2=request.user.playerdata.ai2_record.all()
