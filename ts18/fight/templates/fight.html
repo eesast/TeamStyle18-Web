@@ -187,13 +187,15 @@
 													  <td>{{player.lasttime}}</td>
 													  <td>
 													  {% ifnotequal player.player request.user %}
-													  {% if player.ai %}
+													  {% if player.ai and request.user.is_authenticated %}
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;">
                                                             {% csrf_token %}
 														    <input type="hidden" name="id" value="{{player.id}}">  
-											                <button class="btn btn-md btn-info" onclick="form.submit();" title="发起挑战">发起挑战</button>
+											                <button class="btn btn-md btn-info" onclick="form.submit();document.getElementById('wait').style.display='block';" title="发起挑战">发起挑战</button>
 											           </form>
-													   </td>
+													   
+													  {% elseif not request.user.is_authenticated %}
+													  尚未登录
 													  {% else %}
 													  尚未上传ai
 													  {% endif %}
