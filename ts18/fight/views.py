@@ -63,10 +63,10 @@ def index(request):
         running = request.user.playerdata.running
         if has_submitted == True and request.user.playerdata.running == False:
             error = ''
-            cpl = subprocess.run('submits/compile.sh %s_%s' % (request.user.username, request.user.id),
+            cpl = subprocess.run('/var/www/ts18/server/compile.sh %s_%s' % (request.user.username, request.user.id),
                                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             if cpl.returncode == 0: #compile completed
-                fight = subprocess.run('server/fight_server.sh %s_%s %s_%s' %
+                fight = subprocess.run('/var/www/ts18/server/fight_server.sh %s_%s %s_%s' %
                                               (request.user.username, request.user.id,
                                               competitor.player.username, competitor.player.id),
                                        shell=True,

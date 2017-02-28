@@ -186,7 +186,7 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'eesaster'
-EMAIL_HOST_PASSWORD = 'eesast2017'
+EMAIL_HOST_PASSWORD = 'eesast2016'
 
 SERVER_EMAIL = 'cpclash@eesast.com'
 
