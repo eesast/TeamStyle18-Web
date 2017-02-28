@@ -62,7 +62,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	<script type="text/javascript">
+<!--	<script type="text/javascript">
 		function getandpost(num)
 		{
 			var tempform=document.createElement('form');
@@ -85,7 +85,7 @@
 			
 			
 		}
-	</script>
+	</script>   -->
 	</head>
 
 	<!-- 
@@ -161,7 +161,7 @@
 						&nbsp &nbsp <a href="{% url 'fight:myself' %}" style="color:#484c50">提交/修改我的代码</a></h3>
 						{% endif %}
 						{% if not request.user.is_authenticated %}
-						&nbsp &nbsp <a href="javascript:(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">提交/修改我的代码</a></h3>
+						&nbsp &nbsp <a href="javascript:void(0)" onclick="document.getElementById('notlogin').style.display='block'" style="color:#484c50">提交/修改我的代码</a></h3>
 						{% endif %}
 						
 
