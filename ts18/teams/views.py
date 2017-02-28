@@ -45,13 +45,15 @@ def index(request):
 
     if request.method == 'POST':
        code = request.POST['code']
-       team = Team.get_object_or_404(pk=request.POST['id'])
-       if code == team.invitationCode:
-          team.members.add(request.user)
-          if team.members.count() >= 3:
-              team.is_full = True
-              team.save()
-          return HttpResponseRedirect(reverse('teams:myteam'))
+       print(request.POST['code'])
+       print(request.POST['id'])
+    #   team = get_object_or_404(Team,pk=request.POST['id'])
+    #   if code == team.invitationCode:
+    #      team.members.add(request.user)
+    #      if team.members.count() >= 3:
+    #          team.is_full = True
+    #          team.save()
+    #      return HttpResponseRedirect(reverse('teams:myteam'))
 
 
     teams = Team.objects.all()
