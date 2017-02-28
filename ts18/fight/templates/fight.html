@@ -188,7 +188,7 @@
 													  <td>
 													  {% ifnotequal player.player request.user %}
 													  {% if player.ai %}
-													  <a href="javascript:(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
+													  <a href="javascript:void(0)" onclick="getandpost('#',{{team.id}})">发起挑战</a>
 													  {% else %}
 													  尚未上传ai
 													  {% endif %}
