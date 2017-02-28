@@ -51,30 +51,18 @@ def index(request):
         except :
             data = Player(player = request.user)
             data.save()
-<<<<<<< HEAD
-      
         if request.user.playerdata.running == True:
             return HttpResponseRedirect(reverse('fight:myself')
-=======
-        if request.user.playerdata.ai!=None:
-            has_submitted=True
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
-<<<<<<< HEAD
         compete_id=request.POST['id']
-=======
-        compete_id=request.POST.get('id','')
-        print(request.POST)
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
         try:
             competitor=Player.objects.get(id=compete_id)
         except Player.DoesNotExsit:
             return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
-<<<<<<< HEAD
         if request.user.playerdata.running == False:
             error = 'in process'
             fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
@@ -94,54 +82,17 @@ def index(request):
                 r.save()
             else:
                 error = 'RUN FAIL\n' + fight.stdout.decode('utf-8')
-=======
-        running = request.user.playerdata.running
-        if has_submitted == True and request.user.playerdata.running == False:
-            error = ''
-            print(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id))
-            cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id),
-                                         shell=True, stdout=subprocess.PIPE)
-
-            if cpl.returncode == 0: #compile completed
-                fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
-                                              (request.user.username, request.user.id,
-                                              competitor.player.username, competitor.player.id),
-                                       shell=True,
-                                       stdout=subprocess.PIPE,
-                                       )
-
-                if fight.returncode == 0:  # process running
-                    request.user.playerdata.running = True
-                    rpN =  fight.stdout.decode('utf-8')
-                    request.user.playerdata.rpyNumber = rpN
-                    request.user.playerdata.save()
-                    r = Record(AI1=request.user.playerdata,
-                               AI2=competitor,
-                               rpyNumber=rpN)
-                    r.save()
-                else:
-                    error = 'run fail,' + fight.stdout.decode('utf-8')
-            else:
-                error = 'compile fail,' + cpl.stdout.decode('utf-8')
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 
             record_list=request.user.playerdata.ai1_record.all()
             record_list2=request.user.playerdata.ai2_record.all()
             records = getRecords(record_list, record_list2, request.user.playerdata)
 
-<<<<<<< HEAD
      #   return render(request, 'fight_myself.html', {'player':request.user.playerdata,
      #                                                'error':error,'records':records,
      #                                                })
 
     return render(request,'fight.html',{'player_list':players_list})
-=======
-        return render(request, 'fight_myself.html', {'player':request.user.playerdata,
-                                                     'error':error,'records':records,
-                                                     'running':request.user.playerdata.running})
 
-    return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 
 
 
@@ -197,13 +148,10 @@ def Get_AI(request):
     os.rename(initial_path,new_path)
     request.user.playerdata.save()
     request.user.save()
-<<<<<<< HEAD
     cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if cpl.returncode != 0:
         request.user.playerdata.ai.delete()
         return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
-=======
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 
 @login_required
 def myself(request):
@@ -247,11 +195,7 @@ def myself(request):
     if request.method=='POST':
         if request.user.is_authenticated():
             error = Get_AI(request)
-<<<<<<< HEAD
             return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
-=======
-            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records, 'running':running})
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 
     if running == True:
         # search the rpyfile and print the process
@@ -266,17 +210,12 @@ def myself(request):
                 last = lines[-1]
                 if '0' in last:
                     r.scorechange = 1 # AI1 wins
-<<<<<<< HEAD
                     r.AI1.score += 1
                     r.AI2.score -= 1
                 elif '1' in last:
                     r.scorechange = -1 # AI2 wins
                     r.AI1.score -= 1
                     r.AI2.score += 1
-=======
-                elif '1' in last:
-                    r.scorechange = -1 # AI2 wins
->>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
             r.save()
             return HttpResponseRedirect(reverse('fight:myself'))
 
