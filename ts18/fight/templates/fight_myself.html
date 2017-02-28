@@ -118,7 +118,11 @@
 		<section id="ts-about">
 			<div class="container">
 				<div class="row">
+<<<<<<< HEAD
 						<div class="col-md-12">
+=======
+					<div class="col-md-12">
+>>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 					{% load myfilter %}
 						{% if request.user.playerdata.ai %}
 					    <a href="{{ player.ai.name|ailink }}">{{ player.ai.name|ainame }}</a>
@@ -129,13 +133,20 @@
 						
 						<input id="uploadFile" type="file" name="aiupload">
 						<input type="submit" name="submit" value="提交文件" class="btn btn-primary btn-md" style="margin-top:20px;">
+<<<<<<< HEAD
 
 						<p>{{error}}</p>
+=======
+>>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 						{% if error %}
 						<script language="javascript">
 							document.getElementById('showerror').style.display='block';
 						</script>
+<<<<<<< HEAD
 						{% endif %} 
+=======
+						{% endif %}
+>>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
 						</form>
 					</div>
 					<div class="col-md-12" style="margin-top:40px;">
@@ -229,4 +240,8 @@
 	
 
 	</body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 9c8b3b19e31cde0c07bd26f91136833a3dab16e9
