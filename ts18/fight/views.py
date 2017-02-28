@@ -53,14 +53,12 @@ def index(request):
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
-        compete_id=request.POST.get('compete_id','')
+        compete_id=request.POST.get('id','')
+        print(request.POST)
         try:
             competitor=Player.objects.get(id=compete_id)
         except Player.DoesNotExsit:
-            if request.user.is_authenticated():
-                return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
-            else:
-                return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
+            return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
         running = request.user.playerdata.running
         if has_submitted == True and request.user.playerdata.running == False:
@@ -97,10 +95,7 @@ def index(request):
                                                      'error':error,'records':records,
                                                      'running':request.user.playerdata.running})
 
-    if request.user.is_authenticated():
-        return render(request,'fight_after_login.html',{'player_list':players_list,'has_submitted':has_submitted})
-    else:
-        return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
+    return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
 
 
 
