@@ -46,8 +46,8 @@ def index(request):
         except :
             data = Player(player = request.user)
             data.save()
-        if request.user.playerdata.running == True:
-            return HttpResponseRedirect(reverse('fight:myself'))
+#        if request.user.playerdata.running == True:
+#            return HttpResponseRedirect(reverse('fight:myself'))
 
     players_list=Player.objects.exclude(ai = None)
 
@@ -56,7 +56,7 @@ def index(request):
         try:
             competitor=Player.objects.get(id=compete_id)
         except Player.DoesNotExsit:
-            return render(request,'fight.html',{'player_list':players_list,'has_submitted':has_submitted})
+            return render(request,'fight.html',{'player_list':players_list})
 
         if request.user.playerdata.running == False:
             error = 'in process'
@@ -68,7 +68,7 @@ def index(request):
                                    )
             if fight.returncode == 0:  # process running
                 request.user.playerdata.running = True
-                rpN =  fight.stdout.decode('utf-8')
+                rpN =  fight.stdout.decode('utf-8').split('\n')[-1]
                 request.user.playerdata.rpyNumber = rpN
                 request.user.playerdata.save()
                 r = Record(AI1=request.user.playerdata,
@@ -82,9 +82,9 @@ def index(request):
             record_list2=request.user.playerdata.ai2_record.all()
             records = getRecords(record_list, record_list2, request.user.playerdata)
 
-     #   return render(request, 'fight_myself.html', {'player':request.user.playerdata,
-     #                                                'error':error,'records':records,
-     #                                                })
+        return render(request, 'fight_myself.html', {'player':request.user.playerdata,
+                                                     'error':error,'records':records,
+                                                     })
 
     return render(request,'fight.html',{'player_list':players_list})
 
