@@ -196,7 +196,7 @@
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;" id="subform">
                                                             {% csrf_token %}
 														    <input type="hidden" name="id" value="{{player.id}}">  
-											                <a onclick="document.getElementById('subform').submit();goto();" href="javascript:void(0);">发起挑战</a>
+											                <a onclick="document.getElementById('subform').submit();" href="javascript:void(0);">发起挑战</a>
 											           </form>
 													   
 													   
