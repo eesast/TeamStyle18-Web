@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+import time
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.files import File
 from .models import Player, Record
 from django.conf import settings
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -46,13 +48,12 @@ def index(request):
         except :
             data = Player(player = request.user)
             data.save()
-#        if request.user.playerdata.running == True:
-#            return HttpResponseRedirect(reverse('fight:myself'))
+        if request.user.playerdata.running == True:
+            return HttpResponseRedirect(reverse('fight:myself'))
 
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
-        error = request.POST
         compete_id=request.POST['id']
         try:
             competitor=Player.objects.get(id=compete_id)
@@ -69,7 +70,8 @@ def index(request):
                                    )
             if fight.returncode == 0:  # process running
                 request.user.playerdata.running = True
-                rpN =  fight.stdout.decode('utf-8').split('\n')[-1]
+                rpN =  fight.stdout.decode('utf-8').strip()
+                error = rpN
                 request.user.playerdata.rpyNumber = rpN
                 request.user.playerdata.save()
                 r = Record(AI1=request.user.playerdata,
@@ -194,25 +196,33 @@ def myself(request):
             return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
 
     if running == True:
+        rpN = request.user.playerdata.rpyNumber.strip()
         # search the rpyfile and print the process
-        rpyPath = os.path.join(settings.BASE_DIR, '..', '..', 'fight_result', request.user.playerdata.rpyNumber+'.rpy')
+        rpyPath = os.path.join(settings.BASE_DIR, '..', '..', 'ts18', 'fight_result', rpN + '.rpy')
+        error = rpyPath
         if os.path.exists(rpyPath):
-            request.user.playerdata.update(running=False)
-            r = Record.objects.get(rpyNumber=request.user.playerdata.rpyNumber)
-            r.log.path = rpyPath
-            r.log.name = request.user.playerdata.rpyNumber+'.rpy'
-            with open(os.path.join(settings.MEDIA_ROOT, 'fight_result', request.user.playerdata.rpyNumber+'.txt'),'r') as f:
+            request.user.playerdata.running = False
+            request.user.playerdata.count += 1
+            request.user.playerdata.save()
+            r = Record.objects.get(rpyNumber=rpN)
+            r.log = rpyPath
+            with open(os.path.join(settings.BASE_DIR, '..', '..', 'ts18', 'fight_result', rpN+'.txt'),'r') as f:
                 lines = f.readlines()
                 last = lines[-1]
+                a = r.AI1.score
+                b = r.AI2.score
                 if '0' in last:
-                    r.scorechange = 1 # AI1 wins
-                    r.AI1.score += 1
-                    r.AI2.score -= 1
+                    r.scorechange = max([0,(2*b-a)//4]) # AI1 wins
+                    r.AI1.score = a+max([0,(2*b-a)//4])	 
+                    r.AI2.score = b-max([0, (b-a/2)//4])
                 elif '1' in last:
-                    r.scorechange = -1 # AI2 wins
-                    r.AI1.score -= 1
-                    r.AI2.score += 1
+                    r.scorechange = -max([0,(a-b/2)//4]) # AI2 wins
+                    r.AI1.score = a-max([0,(a-b/2)//4])
+                    r.AI2.score = b+max([0,(2*a-b)//4])
+            r.AI1.save()
+            r.AI2.save()
             r.save()
+            time.sleep(0.5)
             return HttpResponseRedirect(reverse('fight:myself'))
 
     return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records })
@@ -236,17 +246,13 @@ def aidownload(request):
 
 def logdownload(request):
     try:
-        filename = request.GET['file']
+        url = request.POST['log']
     except:
         raise Http404
-    Log = get_object_or_404(Record, log=filename)
-    path = Log.log.path
-    name = os.path.split(path)[-1]
+    name = os.path.split(url)[-1]
     name = urllib.parse.quote(name)
-
-    wrapper = FileWrapper(open(path, 'rb'))
+    wrapper = FileWrapper(open(url, 'rb'))
     response = HttpResponse(wrapper)
-    response['Content-Length'] = Log.log.size
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(os.path.split(name)[-1])
     return response
