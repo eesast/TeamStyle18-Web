@@ -47,7 +47,7 @@ def index(request):
             data = Player(player = request.user)
             data.save()
         if request.user.playerdata.running == True:
-            return HttpResponseRedirect(reverse('fight:myself')
+            return HttpResponseRedirect(reverse('fight:myself'))
 
     players_list=Player.objects.exclude(ai = None)
 
