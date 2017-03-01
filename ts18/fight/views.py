@@ -54,6 +54,7 @@ def index(request):
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
+        error = ''
         compete_id=request.POST['id']
         try:
             competitor=Player.objects.get(id=compete_id)
