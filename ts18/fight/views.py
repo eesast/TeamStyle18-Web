@@ -79,9 +79,9 @@ def index(request):
        #     else:
         #        error += 'RUN FAIL\n' + fight.stdout.decode('utf-8') + fight.stderr.decode('utf-8')
 
-            record_list=request.user.playerdata.ai1_record.all()
-            record_list2=request.user.playerdata.ai2_record.all()
-            records = getRecords(record_list, record_list2, request.user.playerdata)
+        record_list=request.user.playerdata.ai1_record.all()
+        record_list2=request.user.playerdata.ai2_record.all()
+        records = getRecords(record_list, record_list2, request.user.playerdata)
 
         return render(request, 'fight_myself.html', {'player':request.user.playerdata,
                                                      'error':error,'records':records,
