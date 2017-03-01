@@ -57,7 +57,12 @@
    
 	<!-- Modernizr JS -->
 	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
-
+	<script>
+		function goto()
+		{
+			window.location.href="{% url 'fight:myself' %}";
+		}
+	</script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -191,8 +196,9 @@
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;">
                                                             {% csrf_token %}
 														    <input type="hidden" name="id" value="{{player.id}}">  
-											                <a onclick="form.submit();" href="{% url 'fight:myself' %}">发起挑战</a>
+											                <a onclick="form.submit();goto();" href="javascript:void(0);">发起挑战</a>
 											           </form>
+													   
 													   
 													  {% elif not request.user.is_authenticated %}
 													  尚未登录
