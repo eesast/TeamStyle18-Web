@@ -70,7 +70,9 @@ def index(request):
                                    stdout=subprocess.PIPE,
                                    )
             if fight.returncode == 0:  # process running
-                request.user.playerdata.running = True
+
+#for debug IMPORTTANT!!!!!               request.user.playerdata.running = True
+
                 rpN =  fight.stdout.decode('utf-8').strip()
                 error = rpN
                 request.user.playerdata.rpyNumber = rpN
