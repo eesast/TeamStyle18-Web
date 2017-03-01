@@ -61,6 +61,9 @@ def index(request):
         except Player.DoesNotExsit:
             return render(request,'fight.html',{'player_list':players_list})
 
+        if (not request.user.playerdata.ai) or (not competitor.ai):
+            raise Http404
+
         if request.user.playerdata.running == False:
        #     error = os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' % (request.user.username, request.user.id, competitor.player.username, competitor.player.id)
             fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' %
@@ -71,9 +74,9 @@ def index(request):
                                    )
             if fight.returncode == 0:  # process running
 
-#for debug IMPORTTANT!!!!!               request.user.playerdata.running = True
+                request.user.playerdata.running = True
 
-                rpN =  fight.stdout.decode('utf-8').strip()
+                rpN =  fight.stdout.decode('utf-8').split()[-1].strip()
                 error = rpN
                 request.user.playerdata.rpyNumber = rpN
                 request.user.playerdata.save()
@@ -196,12 +199,15 @@ def myself(request):
     if request.method=='POST':
         if request.user.is_authenticated():
             error = Get_AI(request)
+            if not error:
+                error = 'Success'
             return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
 
     if running == True:
         rpN = request.user.playerdata.rpyNumber.strip()
         # search the rpyfile and print the process
         rpyPath = os.path.join(settings.BASE_DIR, '..', '..', 'ts18', 'fight_result', rpN + '.rpy')
+        txtPath = os.path.join(settings.BASE_DIR, '..', '..', 'ts18', 'fight_result', rpN+'.txt')
         error = rpyPath
         if os.path.exists(rpyPath):
             request.user.playerdata.running = False
@@ -209,7 +215,7 @@ def myself(request):
             request.user.playerdata.save()
             r = Record.objects.get(rpyNumber=rpN)
             r.log = rpyPath
-            with open(os.path.join(settings.BASE_DIR, '..', '..', 'ts18', 'fight_result', rpN+'.txt'),'r') as f:
+            with open(txtPath, 'r') as f:
                 lines = f.readlines()
                 last = lines[-1]
                 a = r.AI1.score
@@ -227,6 +233,11 @@ def myself(request):
             r.save()
             time.sleep(0.5)
             return HttpResponseRedirect(reverse('fight:myself'))
+        else:
+            with open(txtPath, 'r') as f:
+                lines = f.readlines()
+                last = lines[-1]
+                error = 'processing' + last.split()[-1] + '/1000'
 
     return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records })
 

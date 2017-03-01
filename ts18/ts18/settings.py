@@ -25,7 +25,7 @@ SECRET_KEY = '6ogq))efpmgdks1!(=08zx(9w22*qzig&+^bz*+b(^fr2+-21+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if socket.gethostname() == 'eesast.com':
-    DEBUG = True 
+    DEBUG = False 
 else:
     DEBUG = True
 
