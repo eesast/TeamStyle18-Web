@@ -52,6 +52,7 @@ def index(request):
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
+        error = request.POST
         compete_id=request.POST['id']
         try:
             competitor=Player.objects.get(id=compete_id)
@@ -59,8 +60,8 @@ def index(request):
             return render(request,'fight.html',{'player_list':players_list})
 
         if request.user.playerdata.running == False:
-            error = 'in process'
-            fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+' %s_%s %s_%s' %
+       #     error = os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' % (request.user.username, request.user.id, competitor.player.username, competitor.player.id)
+            fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' %
                                           (request.user.username, request.user.id,
                                           competitor.player.username, competitor.player.id),
                                    shell=True,
@@ -75,8 +76,8 @@ def index(request):
                            AI2=competitor,
                            rpyNumber=rpN)
                 r.save()
-            else:
-                error = 'RUN FAIL\n' + fight.stdout.decode('utf-8')
+       #     else:
+        #        error += 'RUN FAIL\n' + fight.stdout.decode('utf-8') + fight.stderr.decode('utf-8')
 
             record_list=request.user.playerdata.ai1_record.all()
             record_list2=request.user.playerdata.ai2_record.all()
