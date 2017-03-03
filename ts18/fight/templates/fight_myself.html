@@ -123,7 +123,7 @@
 					{% if not request.user.playerdata.running %}
 					{% load myfilter %}
 						{% if request.user.playerdata.ai %}
-					    <a href="{{ player.ai.name|ailink }}">{{ player.ai.name|ainame }}</a>
+					    <a href="{{ request.user.playerdata.ai.name|ailink }}">{{ request.user.playerdata.ai.name|ainame }}</a>
 						{% endif %}
 						<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
@@ -161,7 +161,7 @@
 									<td><form action="{% url 'fight:logdownload' %}" method="post" style="display:inline;" id="subform">
                                                             {% csrf_token %}
 							                   <input type="hidden" name="log" value="{{record.log}}">  
-									    <button class="btn btn-md btn-info" onclick="form.submit();">�下载文件</button>
+									    <button class="btn btn-md btn-info" onclick="form.submit();">download</button>
 										</form>
 									</td>
 								</tr>

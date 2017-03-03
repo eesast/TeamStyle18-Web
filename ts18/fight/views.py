@@ -91,7 +91,7 @@ def index(request):
         record_list2=request.user.playerdata.ai2_record.all()
         records = getRecords(record_list, record_list2, request.user.playerdata)
 
-        return render(request, 'fight_myself.html', {'player':request.user.playerdata,
+        return render(request, 'fight_myself.html', {
                                                      'error':error,'records':records,
                                                      })
 
@@ -201,7 +201,7 @@ def myself(request):
             error = Get_AI(request)
             if not error:
                 error = 'Success'
-            return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records})
+            return render(request, 'fight_myself.html', {'error':error,'records':records})
 
     if running == True:
         rpN = request.user.playerdata.rpyNumber.strip()
@@ -239,7 +239,7 @@ def myself(request):
                 last = lines[-1]
                 error = 'processing' + last.split()[-1] + '/1000'
 
-    return render(request, 'fight_myself.html', {'player':request.user.playerdata,'error':error,'records':records })
+    return render(request, 'fight_myself.html', {'error':error,'records':records })
 
 def aidownload(request):
     try:
