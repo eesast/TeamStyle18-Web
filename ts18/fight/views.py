@@ -67,8 +67,8 @@ def index(request):
         if request.user.playerdata.running == False:
        #     error = os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' % (request.user.username, request.user.id, competitor.player.username, competitor.player.id)
             fight = subprocess.run(os.path.join(settings.BASE_DIR, '..','..', 'ts18', 'server', 'fight_server.sh')+ ' %s_%s %s_%s' %
-                                          (request.user.username, request.user.id,
-                                          competitor.player.username, competitor.player.id),
+                                          ( request.user.profile.student_id, request.user.id,
+                                           competitor.player.profile.student_id, competitor.player.id),
                                    shell=True,
                                    stdout=subprocess.PIPE,
                                    )
@@ -136,10 +136,10 @@ def Get_AI(request):
     # rename the new avatar to a regular name, and meanwhile, place the avatar
     # at a required place (using os.rename)
     pathdir = os.path.join(
-        settings.BASE_DIR, '..','..','ts18','submits', '%s_%s' % (request.user.username, request.user.id))
+        settings.BASE_DIR, '..','..','ts18','submits', '%s_%s' % (request.user.profile.student_id, request.user.id))
     request.user.playerdata.ai.name=os.path.join(
         'submits',
-        '%s_%s' % (request.user.username, request.user.id),'playerMain.cpp')
+        '%s_%s' % (request.user.profile.student_id,request.user.id),'playerMain.cpp')
 
     new_path=os.path.join(pathdir, 'playerMain.cpp')
 
@@ -152,7 +152,7 @@ def Get_AI(request):
     os.rename(initial_path,new_path)
     request.user.playerdata.save()
     request.user.save()
-    cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.username, request.user.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.profile.student_id, request.user.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if cpl.returncode != 0:
         request.user.playerdata.ai.delete()
         return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
