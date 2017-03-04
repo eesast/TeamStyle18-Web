@@ -155,7 +155,11 @@ def Get_AI(request):
     cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s_%s' % (request.user.profile.student_id, request.user.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if cpl.returncode != 0:
         request.user.playerdata.ai.delete()
-        return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
+        try:
+            note = 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
+        except:
+            note = 'ComPILATION ERROR\n  '
+        return note
 
 @login_required
 def myself(request):
@@ -237,27 +241,32 @@ def myself(request):
             with open(txtPath, 'r') as f:
                 lines = f.readlines()
                 last = lines[-1]
-                error = 'processing' + last.split()[-1] + '/1000'
+                turn = last.split()[-1]
+                if len(turn) > 4:
+                    request.uesr.playerdata.running = False
+                    request.user.playerdata.save()
+                    error = 'Platform Crashed'
+                else:
+                    error = 'turn:' + last.split()[-1]
 
     return render(request, 'fight_myself.html', {'error':error,'records':records })
 
+@login_required
 def aidownload(request):
     try:
-        filename = request.GET['file']
+        url = request.POST['path']
     except:
         raise Http404
-    player = get_object_or_404(Player, ai=filename)
-    path = player.ai.path
+    path = os.path.join( settings.BASE_DIR, '..', '..', 'ts18', url)
     name = os.path.split(path)[-1]
     name = urllib.parse.quote(name)
-
     wrapper = FileWrapper(open(path, 'rb'))
     response = HttpResponse(wrapper)
-    response['Content-Length'] = player.ai.size
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(os.path.split(name)[-1])
     return response
 
+@login_required
 def logdownload(request):
     try:
         url = request.POST['log']
