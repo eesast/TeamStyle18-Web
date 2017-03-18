@@ -67,7 +67,9 @@
 					<ul class="pull-left left-menu">
 						<li><a href="{% url 'index:index' %}">Home</a></li>
 						<li><a href="{% url 'index:intro' %}">介绍</a></li>
-			<!--			<li><a href="{% url 'index:rule' %}">规则</a></li>  -->
+
+				<!--		<li><a href="{% url 'index:rule' %}">规则</a></li>  -->
+
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
 						<li class="active"><a href="{% url 'teams:index' %}">组队</a></li>
@@ -129,7 +131,7 @@
 													  <td>队长</td>
 													  <td>简介</td>
 													  <td>成员</td>
-													  <td>操作</td>
+											<!--		  <td>操作</td>    -->
 													</tr>
 												  </thead>
 												  <tbody>
@@ -145,6 +147,7 @@
 													  {{member.username}}&nbsp &nbsp
 													  {% endfor %}
 													  </td>
+													  <!--
 													  {% if not in_team and not team.is_full %}
                                                       <td><a href="javascript:(0);" onclick="document.getElementById('inputcode').style.display='block';">加入</a></td>
 															<div id="inputcode">
@@ -167,19 +170,32 @@
 															</div>				
 													  {% else %}
 													  <td>不可加入</td>
-													  {% endif %}
+													  {% endif %}       -->
 													</tr>
 												  {% endfor %}
 												  </tbody>
 												</table>
 												{% if not in_team %}
 												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="{% url 'teams:create' %}" style="color: #FFFFFF">创建自己的队伍</a></button>
+												
+													
 												{% else %}
 												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="{% url 'teams:myteam' %}" style="color: #FFFFFF">查看自己的队伍</a></button>
 												{% endif %}
 								
 						</div>
-						
+					<div class="col-md-10 col-md-offset-1">
+                        <form id="team-form" class="row" action="" method="post">
+                            {% csrf_token %}
+
+                                                        <div class="col-md-6">
+                                                                <label for="name">请输入要加队伍的邀请码 <span>*</span></label>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                                <input type="passwd" name="name" id="name" class="email required input-xlarge" value="" style="height:30px; width:50%;">
+                                                        </div>	
+													</form>
+												</div>
 					</div>
 				</div>
 			</section>
