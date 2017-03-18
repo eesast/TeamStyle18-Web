@@ -185,6 +185,7 @@
 								
 						</div>
 					<div class="col-md-10 col-md-offset-1">
+                        {% if not in_team %}
                         <form id="team-form" class="row" action="" method="post">
                             {% csrf_token %}
 
@@ -192,12 +193,13 @@
                                                                 <label for="name">请输入要加队伍的邀请码 <span>*</span></label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                                <input type="passwd" name="name" id="name" class="email required input-xlarge" value="" style="height:30px; width:50%;">
+                                                                <input type="passwd" name="code" id="code" class="email required input-xlarge" value="" style="height:30px; width:50%;">
                                                         </div>	
 														<div class="col-md-10">
-                                                                <input type="submit" name="submit" value="申请加入" class="btn btn-primary btn-lg" style="width: 60%; ">
+                                                                <input type="submit" name="submit" value="提交" class="btn btn-primary btn-lg" style="width: 60%; ">
                                                         </div>
 													</form>
+                        {% endif %}
 												</div>
 					</div>
 				</div>

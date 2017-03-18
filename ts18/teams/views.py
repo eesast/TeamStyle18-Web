@@ -47,7 +47,7 @@ def index(request):
        code = request.POST['code']
        print(request.POST['code'])
        try:
-           team = Team.objects.get(invitationCode == code)
+           team = Team.objects.get(invitationCode=code)
            team.members.add(request.user)
            if team.members.count() >= 3:
                team.is_full = True
