@@ -175,7 +175,7 @@
 												  {% endfor %}
 												  </tbody>
 												</table>
-												{% if not in_team %}
+												{% if not in_team and request.user.is_authenticated %}
 												<button class="btn btn-block btn-info" style="font-size:20px; height:50px; margin-bottom:17px;"><a href="{% url 'teams:create' %}" style="color: #FFFFFF">创建自己的队伍</a></button>
 												
 													
@@ -194,6 +194,9 @@
                                                         <div class="col-md-10">
                                                                 <input type="passwd" name="name" id="name" class="email required input-xlarge" value="" style="height:30px; width:50%;">
                                                         </div>	
+														<div class="col-md-10">
+                                                                <input type="submit" name="submit" value="申请加入" class="btn btn-primary btn-lg" style="width: 60%; ">
+                                                        </div>
 													</form>
 												</div>
 					</div>
