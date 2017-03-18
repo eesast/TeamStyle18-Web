@@ -43,7 +43,7 @@ def index(request):
     # user joins a group by posting a invitation code.
     note = ''
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
        code = request.POST['code']
        print(request.POST['code'])
        try:
