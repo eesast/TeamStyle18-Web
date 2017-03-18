@@ -106,6 +106,10 @@
 						<h2>创建队伍</h2>
 						<hr>
 						<p>创建一支属于自己的队伍并招募小伙伴！</p>
+                        {% for error in errors %}
+                        <p>{{error}}</p>
+                        {% endfor %}
+
 					</div>
 					<div class="col-md-10 col-md-offset-1">
                         <form id="contact-form" class="row" action="{% url 'teams:create' %}" method="post">
