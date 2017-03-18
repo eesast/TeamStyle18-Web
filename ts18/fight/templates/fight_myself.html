@@ -69,7 +69,11 @@
 					<ul class="pull-left left-menu">
 						<li><a href="{% url 'index:index' %}">Home</a></li>
 						<li><a href="{% url 'index:intro' %}">介绍</a></li>
+<<<<<<< HEAD
 			<!--			<li><a href="{% url 'index:rule' %}">规则</a></li>  -->
+=======
+			<!--			<li><a href="{% url 'index:rule' %}">规则</a></li>   -->
+>>>>>>> f4c8acbf8b8d5825a287b925b9bebedf444a364c
 						<li><a href="{% url 'file:notice' %}">文件</a></li>
 						<li><a href="{% url 'forum:forum_index' %}">论坛</a></li>
 						<li><a href="{% url 'teams:index' %}">组队</a></li>
@@ -119,11 +123,16 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p>{{error}}</p>
+						<p>{% autoescape off %}{{error}}{% endautoescape %}</p>
 					{% if not request.user.playerdata.running %}
 					{% load myfilter %}
 						{% if request.user.playerdata.ai %}
-					    <a href="{{ request.user.playerdata.ai.name|ailink }}">{{ request.user.playerdata.ai.name|ainame }}</a>
+									<form action="{% url 'fight:aidownload' %}" method="post" style="display:inline;" id="subform">
+                                                            {% csrf_token %}
+							                   <input type="hidden" name="path" value="{{ request.user.playerdata.ai.name }}">  
+									    <button class="btn btn-md btn-info" onclick="form.submit();">查看已经提交的ai</button>
+										</form>
+									
 						{% endif %}
 						<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
@@ -147,23 +156,29 @@
 									<th>对战时间</th>
 									<th>对战对手</th>
 									<th>对战结果</th>
-									<th>获得积分</th>
+								
 									<th>日志文件</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for record in records %}
+
 								<tr>
 									<td>{{record.time}}</td>
 									<td>{{record.competitor}}</td>
 									<td>{{record.result}}</td>
-									<td>{{record.scorechange}}</td>
-									<td><form action="{% url 'fight:logdownload' %}" method="post" style="display:inline;" id="subform">
+									
+ 									
+									<td>
+									 {% if record.log %}
+										<form action="{% url 'fight:logdownload' %}" method="post" style="display:inline;" id="subform">
                                                             {% csrf_token %}
 							                   <input type="hidden" name="log" value="{{record.log}}">  
 									    <button class="btn btn-md btn-info" onclick="form.submit();">download</button>
 										</form>
+									{% endif %}
 									</td>
+									
 								</tr>
 								{% endfor %}
 							</tbody>

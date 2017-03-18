@@ -47,22 +47,24 @@ def index(request):
        code = request.POST['code']
        print(request.POST['code'])
        print(request.POST['id'])
-    #   team = get_object_or_404(Team,pk=request.POST['id'])
-    #   if code == team.invitationCode:
-    #      team.members.add(request.user)
-    #      if team.members.count() >= 3:
-    #          team.is_full = True
-    #          team.save()
-    #      return HttpResponseRedirect(reverse('teams:myteam'))
+       team = get_object_or_404(Team,pk=request.POST['id'])
+       if code == team.invitationCode:
+          team.members.add(request.user)
+          if team.members.count() >= 3:
+              team.is_full = True
+              team.save()
+          return HttpResponseRedirect(reverse('teams:myteam'))
+       else:
+           note = '邀请码错误'
 
 
     teams = Team.objects.all()
     in_team = if_in_team(request.user)
-    return render(request, 'team_index.html', {'teams':teams, 'in_team':in_team})
+    return render(request, 'team_index.html', {'teams':teams, 'in_team':in_team, 'note':note})
 
 
 
-
+@login_required
 def create(request):
 
     errors = []
@@ -81,7 +83,7 @@ def create(request):
                 errors.append('队名已被使用')
             existCode = Team.objects.filter(invitationCode=code)
             if existCode.count():
-                errors.append('邀请码太短')
+                errors.append('邀请码太短, 可输入长度不大于200字符串')
 
             if errors:
                 return render(request, 'team_create.html', {'form': form, 'errors' : errors })
@@ -98,6 +100,18 @@ def create(request):
 
 @login_required
 def myteam(request):
+
+    # kickout a member in a certain team
+    if request.method == 'POST' and request.user.profile.is_leader:
+        name = request.POST['name']
+        team = request.user.leads
+        thisone = team.members.get(username=name)
+        team.members.remove(thisone)
+        if team.members.count() < 3:
+            team.is_full = False
+            team.save()
+        HttpResponseRedirect(reverse('teams:myteam'))
+
     user_info_dict = get_user_info(request.user)
     return render(request, 'team_myteam.html', user_info_dict)
 

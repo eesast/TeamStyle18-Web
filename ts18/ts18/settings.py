@@ -25,7 +25,7 @@ SECRET_KEY = '6ogq))efpmgdks1!(=08zx(9w22*qzig&+^bz*+b(^fr2+-21+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if socket.gethostname() == 'eesast.com':
-    DEBUG = False 
+    DEBUG = True
 else:
     DEBUG = True
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'teams',
 	'file',
     'fight',
+    'django_q'
 ]
 
 EESAST_AUTHORIZE_URL = 'www.eesast.com/'

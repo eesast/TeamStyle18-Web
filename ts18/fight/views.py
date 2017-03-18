@@ -220,44 +220,56 @@ def myself(request):
                 last = lines[-1]
                 a = r.AI1.score
                 b = r.AI2.score
+                wea = 1./(1+10**((b-a)/400.))
+                web = 1./(1+10**((a-b)/400.))
                 if '0' in last:
-                    r.scorechange = max([0,(2*b-a)//4]) # AI1 wins
-                    r.AI1.score = a+max([0,(2*b-a)//4])	 
-                    r.AI2.score = b-max([0, (b-a/2)//4])
+                    r.scorechange = 1
+                    r.AI1.score = int(a+32*(1-wea))	 
+                    r.AI2.score = int(b+32*(0-web))
                 elif '1' in last:
-                    r.scorechange = -max([0,(a-b/2)//4]) # AI2 wins
-                    r.AI1.score = a-max([0,(a-b/2)//4])
-                    r.AI2.score = b+max([0,(2*a-b)//4])
+                    r.scorechange = -1
+                    r.AI1.score = int(a+32*(1-wea))	 
+                    r.AI2.score = int(b+32*(0-web))
+                else:
+                    r.scorechange = 0
+                    r.AI1.score = int(a+32*(0.5-wea))	 
+                    r.AI2.score = int(b+32*(0.5-web))
             r.AI1.save()
             r.AI2.save()
             r.save()
             time.sleep(0.5)
             return HttpResponseRedirect(reverse('fight:myself'))
         else:
+            time.sleep(0.05)
             with open(txtPath, 'r') as f:
                 lines = f.readlines()
                 last = lines[-1]
-                error = 'processing' + last.split()[-1] + '/1000'
+                turn = last.split()[-1]
+                if len(turn) > 4 or last.split()[0] != 'server':
+                    request.user.playerdata.running = False
+                    request.user.playerdata.save()
+                    error = 'Platform Crashed'
+                else:
+                    error = 'turn:' + turn
 
     return render(request, 'fight_myself.html', {'error':error,'records':records })
 
+@login_required
 def aidownload(request):
     try:
-        filename = request.GET['file']
+        url = request.POST['path']
     except:
         raise Http404
-    player = get_object_or_404(Player, ai=filename)
-    path = player.ai.path
+    path = os.path.join( settings.BASE_DIR, '..', '..', 'ts18', url)
     name = os.path.split(path)[-1]
     name = urllib.parse.quote(name)
-
     wrapper = FileWrapper(open(path, 'rb'))
     response = HttpResponse(wrapper)
-    response['Content-Length'] = player.ai.size
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(os.path.split(name)[-1])
     return response
 
+@login_required
 def logdownload(request):
     try:
         url = request.POST['log']
