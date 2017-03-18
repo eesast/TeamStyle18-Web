@@ -15,7 +15,7 @@ import urllib
 
 def getRecords(list1, list2, playerData):
     records=[]
-    record_list = sorted(chain(list1, list2), key=attrgetter('time'),reverse=False)
+    record_list = sorted(chain(list1, list2), key=attrgetter('time'),reverse=True)
     for record in record_list:
         r={}
         r['time']=record.time
@@ -51,7 +51,7 @@ def index(request):
         if request.user.playerdata.running == True:
             return HttpResponseRedirect(reverse('fight:myself'))
 
-    players_list=Player.objects.exclude(ai = None)
+    players_list=Player.objects.exclude(ai = None).order_by("-score","id")
 
     if request.method=='POST':
         error = ''
@@ -156,7 +156,7 @@ def Get_AI(request):
     if cpl.returncode != 0:
         request.user.playerdata.ai.delete()
         try:
-            note = 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
+            note = 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8','ignore').replace('\n','<br/>')
         except:
             note = 'ComPILATION ERROR\n  '
         return note
@@ -224,26 +224,33 @@ def myself(request):
                 last = lines[-1]
                 a = r.AI1.score
                 b = r.AI2.score
+                wea = 1.0/(1+10**((b-a)/400.0))
+                web = 1.0/(1+10**((a-b)/400.0))
                 if '0' in last:
-                    r.scorechange = max([0,(2*b-a)//4]) # AI1 wins
-                    r.AI1.score = a+max([0,(2*b-a)//4])	 
-                    r.AI2.score = b-max([0, (b-a/2)//4])
+                    r.scorechange = 1 #max([0,(2*b-a)//4]) # AI1 wins
+                    r.AI1.score = int(a+32*(1-wea))	 
+                    r.AI2.score = int(b+32*(0-web))
                 elif '1' in last:
-                    r.scorechange = -max([0,(a-b/2)//4]) # AI2 wins
-                    r.AI1.score = a-max([0,(a-b/2)//4])
-                    r.AI2.score = b+max([0,(2*a-b)//4])
+                    r.scorechange = -1 # -max([0,(a-b/2)//4]) # AI2 wins
+                    r.AI1.score = int(a+32*(0-wea))
+                    r.AI2.score = int(b+32*(1-web))
+                else:
+                    r.scorechange = 0
+                    r.AI1.score = int(a+32*(0.5-wea))
+                    r.AI2.score = int(b+32*(0.5-web))
             r.AI1.save()
             r.AI2.save()
             r.save()
             time.sleep(0.5)
             return HttpResponseRedirect(reverse('fight:myself'))
         else:
+            time.sleep(0.05)
             with open(txtPath, 'r') as f:
                 lines = f.readlines()
                 last = lines[-1]
                 turn = last.split()[-1]
-                if len(turn) > 4:
-                    request.uesr.playerdata.running = False
+                if len(turn) > 4 or last.split()[0] != 'server':
+                    request.user.playerdata.running = False
                     request.user.playerdata.save()
                     error = 'Platform Crashed'
                 else:
