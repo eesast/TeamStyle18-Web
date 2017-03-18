@@ -43,20 +43,28 @@ def get_user_info(access_token):
 	else:
 		return None
 
-def check_user(data):
+def check_user(data, login_name):
     if not 'name' in data or not 'student_ID' in data:
         raise Exception
     try:
-        user1 = User.objects.get(username=data['name'])
+        client = Member.objects.get(login_name=login_name)
+        user1 = client.user
         user1.profile.student_id = data['student_ID']
         user1.profile.save()
         return user1
-    except User.DoesNotExist :
-        user2 = User(username=data['name'])
-        user2.save()
-        member = Member(user=user2, student_id=data['student_ID'])
-        member.save()
-        return user2
+    except Member.DoesNotExist :
+        try:
+            user1 = User.objects.get(username=data['name'])
+        except User.DoesNotExist:
+            user2 = User(username=data['name'])
+            user2.save()
+            member = Member(user=user2, student_id=data['student_ID'], login_name=login_name)
+            member.save()
+            return user2
+        user1.profile.student_id = data['student_ID']
+        user1.profile.login_name = login_name
+        user1.profile.save()
+        return user1
 
 def Login(request):
     error = ''
@@ -78,7 +86,7 @@ def Login(request):
                 try:
                     access_token = get_access_token(cd['username'],cd['password'])
                     data = get_user_info(access_token)
-                    user = check_user(data)
+                    user = check_user(data, cd['username'])
                     login(request,user)
                 except Exception:
                     error = '登录申请失败！请确认用户名与密码是否正确，以及学号与姓名信息是否完整!'
