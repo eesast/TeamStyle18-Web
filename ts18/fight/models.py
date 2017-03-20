@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
+import datetime
 
 class Player(models.Model):
     player = models.OneToOneField(User, related_name='playerdata')
@@ -11,6 +12,8 @@ class Player(models.Model):
     rpyNumber = models.CharField(default='', max_length=100)
     lasttime = models.DateTimeField(auto_now=True)
     count = models.IntegerField(default=0)
+    daily_count = models.IntegerField(default=0)
+    last_reset_time = models.DateTimeField(default = '2017-3-20 00:00:02')
     def __str__(self):
         return self.player.username
 
