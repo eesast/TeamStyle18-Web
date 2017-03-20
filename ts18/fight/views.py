@@ -220,6 +220,7 @@ def myself(request):
         if os.path.exists(rpyPath):
             request.user.playerdata.running = False
             request.user.playerdata.count += 1
+			request.user.playerdata.daily_count += 1
             request.user.playerdata.save()
             r = Record.objects.get(rpyNumber=rpN)
             r.log = rpyPath
