@@ -213,12 +213,16 @@
 													    {% if not request.user.playerdata.ai %}  
 														  您未提交ai
 												             {% else %}
-										
+																{% ifequal player.daily_count 50 %}
+																	今日对战已达上限
+																{% else %}
+																
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;" id="subform">
                                                             {% csrf_token %}
 														    <input type="hidden" name="id" value="{{player.id}}">  
 											                <button class="btn btn-md btn-info" onclick="form.submit();">发起挑战</button>
 											           </form>
+													   {% endifequal %}
 													   {% endif %}
 													   {% endif %}
 													   

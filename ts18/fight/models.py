@@ -16,7 +16,8 @@ class Player(models.Model):
     last_reset_time = models.DateTimeField(default = '2017-3-20 00:00:02')
     def __str__(self):
         return self.player.username
-
+	class Meta:
+    	ordering = ['-score']
 
 class Record(models.Model):
     AI1 = models.ForeignKey(Player,related_name='ai1_record',verbose_name='ai1')
