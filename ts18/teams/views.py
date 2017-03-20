@@ -43,18 +43,17 @@ def index(request):
     # user joins a group by posting a invitation code.
     note = ''
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
        code = request.POST['code']
        print(request.POST['code'])
-       print(request.POST['id'])
-       team = get_object_or_404(Team,pk=request.POST['id'])
-       if code == team.invitationCode:
-          team.members.add(request.user)
-          if team.members.count() >= 3:
-              team.is_full = True
-              team.save()
-          return HttpResponseRedirect(reverse('teams:myteam'))
-       else:
+       try:
+           team = Team.objects.get(invitationCode=code)
+           team.members.add(request.user)
+           if team.members.count() >= 3:
+               team.is_full = True
+               team.save()
+           return HttpResponseRedirect(reverse('teams:myteam'))
+       except Team.DoesNotExist:
            note = '邀请码错误'
 
 

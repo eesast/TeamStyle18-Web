@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 import time
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.files import File
@@ -51,6 +52,13 @@ def index(request):
         if request.user.playerdata.running == True:
             return HttpResponseRedirect(reverse('fight:myself'))
 
+    count_info = Player.objects.all()
+    time_now = datetime.datetime.now()
+    for x in count_info:
+        if time_now.day != x.last_reset_time.day:
+            x.last_reset_time=datetime.datetime.now()+datetime.timedelta(hours=8)
+            x.daily_count=0
+            x.save()
     players_list=Player.objects.exclude(ai = None)
 
     if request.method=='POST':
@@ -212,6 +220,7 @@ def myself(request):
         if os.path.exists(rpyPath):
             request.user.playerdata.running = False
             request.user.playerdata.count += 1
+			request.user.playerdata.daily_count += 1
             request.user.playerdata.save()
             r = Record.objects.get(rpyNumber=rpN)
             r.log = rpyPath
