@@ -84,7 +84,7 @@ def index(request):
 
                 request.user.playerdata.running = True
 
-                rpN =  fight.stdout.decode('utf-8').split()[-1].strip()
+                rpN =  fight.stdout.decode('utf-8','ignore').split()[-1].strip()
                 error = rpN
                 request.user.playerdata.rpyNumber = rpN
                 request.user.playerdata.save()
@@ -163,7 +163,7 @@ def Get_AI(request):
     cpl = subprocess.run(os.path.join(settings.BASE_DIR,'..', '..', 'ts18', 'server', 'compile.sh') + ' %s' % request.user.id, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if cpl.returncode != 0:
         request.user.playerdata.ai.delete()
-        return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8')
+        return 'COMPILATION ERROR\n' + cpl.stdout.decode('utf-8','ignore')
 
 @login_required
 def myself(request):
@@ -220,7 +220,7 @@ def myself(request):
         if os.path.exists(rpyPath):
             request.user.playerdata.running = False
             request.user.playerdata.count += 1
-			request.user.playerdata.daily_count += 1
+            request.user.playerdata.daily_count += 1
             request.user.playerdata.save()
             r = Record.objects.get(rpyNumber=rpN)
             r.log = rpyPath
