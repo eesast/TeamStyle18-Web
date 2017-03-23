@@ -195,41 +195,57 @@
 													</tr>
 												  </thead>
 												  <tbody>
-												  {% for player in player_list %}
+												  {% for team in team_list %}
 												    <tr>
 													  <td>{{forloop.counter}}</td>
-													  <td>{{player.player.username}}</td>
-													  <td>{{player.score}}</td>
-													  <td>{{player.lasttime}}</td>
+													  <td>{{team.name}}</td>
+													  <td>{{team.leader.score}}</td>
+													  <td>{{team.leader.lasttime}}</td>
 
 													  <td>内测结束
 											<!--		  
 
-													  {% ifnotequal player.player request.user %}
-													  {% if request.user.is_authenticated %}
-												          {% if not player.ai %}
+								{% ifnotequal player.player request.user %}
+									{% if request.user.is_authenticated %}
+										{% if not team.leader.ai %}
 													    尚未提交ai
-													  {% else %}
-													    {% if not request.user.playerdata.ai %}  
-														  您未提交ai
-												             {% else %}
-																{% ifequal player.daily_count 50 %}
+										{% else %}
+											{% if request.user.profile.is_leader %}
+												{% if not request.user.playerdata.ai %}  
+																您未提交ai
+												{% else %}
+													{% ifequal team.leader.daily_count 50 %}
 																	今日对战已达上限
-																{% else %}
+													{% else %}
 																
 													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;" id="subform">
                                                             {% csrf_token %}
-														    <input type="hidden" name="id" value="{{player.id}}">  
+														    <input type="hidden" name="id" value="{{team.leader.id}}">  
 											                <button class="btn btn-md btn-info" onclick="form.submit();">发起挑战</button>
 											           </form>
-													   {% endifequal %}
-													   {% endif %}
-													   {% endif %}
+													{% endifequal %}
+												{% endif %}
+											{% else %}
+												{% if not request.user.in_team.leader.playerdata.ai %}  
+																您未提交ai
+												{% else %}
+													{% ifequal request.user.in_team.leader.daily_count 50 %}
+																	今日对战已达上限
+													{% else %}
+																
+													  <form action="{% url 'fight:index' %}" method="post" style="display:inline;" id="subform">
+                                                            {% csrf_token %}
+														    <input type="hidden" name="id" value="{{team.leader.playerdata.id}}">  
+											                <button class="btn btn-md btn-info" onclick="form.submit();">发起挑战</button>
+											           </form>
+													{% endifequal %}
+												{% endif %}
+										{% endif %}
 													   
-													  {% else %}
+									{% else %}
 													  尚未登录
-													   {% endif %}
-													  {% endifnotequal %}         -->
+									{% endif %}
+								{% endifnotequal %}         -->
 													  </td>
 													</tr>
 													{% endfor %}
